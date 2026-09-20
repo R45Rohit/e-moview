@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login or Register — MovieSuggest</title>
+  <meta name="description" content="Create an account or login to ask for movie recommendations and suggest movies to others.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#07070d">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="nav-container"></div>
+
+  <main class="page">
+    <div class="container container-narrow">
+      <div class="auth-container fade-in">
+        <div class="auth-header">
+          <h1 id="authTitle">Welcome to MovieSuggest</h1>
+          <p id="authSubtitle">Create an account to start sharing and getting movie recommendations.</p>
+        </div>
+
+        <div class="auth-card">
+          <!-- Auth Error Display -->
+          <div class="auth-error" id="authError"></div>
+
+          <!-- Register Form -->
+          <form id="registerForm">
+            <div class="form-group">
+              <label class="form-label" for="regName">Full Name</label>
+              <input type="text" id="regName" class="form-input" placeholder="Your display name" required minlength="2" maxlength="50" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regEmail">Email Address</label>
+              <input type="email" id="regEmail" class="form-input" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regPassword">Password</label>
+              <input type="password" id="regPassword" class="form-input" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regConfirmPassword">Confirm Password</label>
+              <input type="password" id="regConfirmPassword" class="form-input" placeholder="Repeat your password" required minlength="6" autocomplete="new-password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="registerBtn">
+              Create Account
+            </button>
+          </form>
+
+          <!-- Login Form (hidden by default) -->
+          <form id="loginForm" class="hidden">
+            <div class="form-group">
+              <label class="form-label" for="loginEmail">Email Address</label>
+              <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" class="form-input" placeholder="Your password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginBtn">
+              Login
+            </button>
+          </form>
+
+          <!-- Toggle Between Login/Register -->
+          <div class="auth-toggle" id="authToggle">
+            Already have an account? <a href="#" id="toggleToLogin">Login</a>
+          </div>
+
+          <div class="auth-divider">or</div>
+
+          <!-- Guest Login -->
+          <button class="btn btn-secondary btn-block" id="guestBtn">
+            👤 Continue as Guest
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>MovieSuggest — People helping people choose movies.</p>
+    </footer>
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/analytics.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const registerForm = document.getElementById('registerForm');
+      const loginForm = document.getElementById('loginForm');
+      const authTitle = document.getElementById('authTitle');
+      const authSubtitle = document.getElementById('authSubtitle');
+      const authToggle = document.getElementById('authToggle');
+      const authError = document.getElementById('authError');
+      const toggleToLogin = document.getElementById('toggleToLogin');
+      const guestBtn = document.getElementById('guestBtn');
+
+      const mode = getUrlParam('mode');
+      const redirect = getUrlParam('redirect') || 'index.html';
+
+      let isLoginMode = mode === 'login';
+
+      function updateView() {
+        if (isLoginMode) {
+          registerForm.classList.add('hidden');
+          loginForm.classList.remove('hidden');
+          authTitle.textContent = 'Welcome Back';
+          authSubtitle.textContent = 'Login to your account to continue.';
+          authToggle.innerHTML = 'Don\'t have an account? <a href="#" id="toggleToRegister">Create Account</a>';
+          document.getElementById('toggleToRegister').addEventListener('click', (e) => {
+            e.preventDefault();
+            isLoginMode = false;
+            hideError();
+            updateView();
+          });
+        } else {
+          loginForm.classList.add('hidden');
+          registerForm.classList.remove('hidden');
+          authTitle.textContent = currentUser && currentUser.isAnonymous
+            ? 'Upgrade Your Account'
+            : 'Welcome to MovieSuggest';
+          authSubtitle.textContent = currentUser && currentUser.isAnonymous
+            ? 'Convert your guest account to a permanent registered account.'
+            : 'Create an account to start sharing and getting movie recommendations.';
+          authToggle.innerHTML = 'Already have an account? <a href="#" id="toggleToLogin">Login</a>';
+          document.getElementById('toggleToLogin').addEventListener('click', (e) => {
+            e.preventDefault();
+            isLoginMode = true;
+            hideError();
+            updateView();
+          });
+        }
+      }
+
+      function showError(message) {
+        authError.textContent = message;
+        authError.classList.add('show');
+      }
+
+      function hideError() {
+        authError.classList.remove('show');
+      }
+
+      function getFirebaseErrorMessage(error) {
+        switch (error.code) {
+          case 'auth/email-already-in-use': return 'This email is already registered. Try logging in instead.';
+          case 'auth/invalid-email': return 'Please enter a valid email address.';
+          case 'auth/weak-password': return 'Password should be at least 6 characters.';
+          case 'auth/user-not-found': return 'No account found with this email.';
+          case 'auth/wrong-password': return 'Incorrect password. Please try again.';
+          case 'auth/invalid-credential': return 'Invalid email or password. Please try again.';
+          case 'auth/too-many-requests': return 'Too many attempts. Please wait a moment and try again.';
+          case 'auth/credential-already-in-use': return 'This email is already linked to another account.';
+          default: return error.message || 'An error occurred. Please try again.';
+        }
+      }
+
+      // Register
+      registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
+
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+        if (password !== confirmPassword) {
+          showError('Passwords do not match.');
+          return;
+        }
+
+        const btn = document.getElementById('registerBtn');
+        btn.disabled = true;
+        btn.textContent = 'Creating Account...';
+
+        try {
+          await registerWithEmail(name, email, password);
+          showToast('Account created successfully!', 'success');
+          setTimeout(() => { window.location.href = redirect; }, 500);
+        } catch (error) {
+          showError(getFirebaseErrorMessage(error));
+          btn.disabled = false;
+          btn.textContent = 'Create Account';
+        }
+      });
+
+      // Login
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
+
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+
+        const btn = document.getElementById('loginBtn');
+        btn.disabled = true;
+        btn.textContent = 'Logging in...';
+
+        try {
+          await loginWithEmail(email, password);
+          showToast('Logged in successfully!', 'success');
+          setTimeout(() => { window.location.href = redirect; }, 500);
+        } catch (error) {
+          showError(getFirebaseErrorMessage(error));
+          btn.disabled = false;
+          btn.textContent = 'Login';
+        }
+      });
+
+      // Guest
+      guestBtn.addEventListener('click', async () => {
+        guestBtn.disabled = true;
+        guestBtn.textContent = 'Loading...';
+        try {
+          await loginAsGuest();
+          window.location.href = redirect;
+        } catch (error) {
+          showError(getFirebaseErrorMessage(error));
+          guestBtn.disabled = false;
+          guestBtn.textContent = '👤 Continue as Guest';
+        }
+      });
+
+      // Init
+      onAuthReady((user) => {
+        injectNav('');
+
+        // If already a registered user, redirect
+        if (user && !user.isAnonymous) {
+          window.location.href = redirect;
+          return;
+        }
+
+        updateView();
+      });
+    });
+  </script>
+</body>
+</html>

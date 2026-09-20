@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MovieSuggest — Get Movie Recommendations from Real People</title>
+  <meta name="description" content="Ask the community what movie you should watch tonight. Get personalized movie suggestions from real people, not algorithms.">
+  <meta name="keywords" content="movie recommendations, movie suggestions, what to watch, community movie picks">
+  <meta name="theme-color" content="#07070d">
+  <link rel="canonical" href="https://your-project.web.app/">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="nav-container"></div>
+
+  <main class="page">
+    <!-- Hero Section -->
+    <section class="hero fade-in" id="hero">
+      <h1 class="hero-title">
+        What should you<br><span class="highlight">watch tonight?</span>
+      </h1>
+      <p class="hero-subtitle">
+        Ask the community and get movie suggestions from real people — not algorithms, not databases, just genuine recommendations.
+      </p>
+      <div class="hero-actions">
+        <a href="ask.html" class="btn btn-primary btn-lg" id="heroAskBtn">
+          💬 Ask for a Recommendation
+        </a>
+        <a href="browse.html" class="btn btn-secondary btn-lg">
+          🔍 Browse Requests
+        </a>
+        <button class="btn btn-ghost btn-lg" id="heroGuestBtn" style="display:none;">
+          👤 Continue as Guest
+        </button>
+      </div>
+    </section>
+
+    <!-- Recent Requests -->
+    <section class="container" id="recentSection">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Recent Requests</h2>
+          <p class="section-subtitle">See what the community is looking for</p>
+        </div>
+        <a href="browse.html" class="btn btn-secondary btn-sm">View All →</a>
+      </div>
+      <div class="grid grid-3" id="recentGrid">
+        <!-- Populated by home.js -->
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="container">
+      <div class="section-header" style="justify-content:center;">
+        <div style="text-align:center;">
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">Simple. Human. No algorithms.</p>
+        </div>
+      </div>
+      <div class="grid grid-3">
+        <div class="card fade-in-up stagger-1" style="text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:16px;">🎯</div>
+          <h3 class="card-title" style="margin-bottom:8px;">Describe Your Mood</h3>
+          <p class="text-secondary" style="font-size:0.9rem;">Tell the community what kind of movie you're in the mood for — genre, language, vibe.</p>
+        </div>
+        <div class="card fade-in-up stagger-2" style="text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:16px;">🍿</div>
+          <h3 class="card-title" style="margin-bottom:8px;">Get Real Suggestions</h3>
+          <p class="text-secondary" style="font-size:0.9rem;">Other users recommend movies they love, with personal reasons why you should watch them.</p>
+        </div>
+        <div class="card fade-in-up stagger-3" style="text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:16px;">🎬</div>
+          <h3 class="card-title" style="margin-bottom:8px;">Pick & Watch</h3>
+          <p class="text-secondary" style="font-size:0.9rem;">Choose from the suggestions and enjoy your movie night. It's that simple.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>MovieSuggest — People helping people choose movies.</p>
+    </footer>
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

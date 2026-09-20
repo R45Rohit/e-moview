@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Details — MovieSuggest</title>
+  <meta name="description" content="View this community movie recommendation request and suggest a movie.">
+  <meta name="theme-color" content="#07070d">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="nav-container"></div>
+
+  <main class="page">
+    <div class="container container-narrow">
+      <!-- Request Detail -->
+      <div id="requestDetail">
+        <div class="loading-center">
+          <div class="spinner spinner-lg"></div>
+          <p>Loading request...</p>
+        </div>
+      </div>
+
+      <!-- Suggestions Section -->
+      <div id="suggestionsSection" style="display:none;">
+        <div class="section-header">
+          <h2 class="section-title">💡 Movie Suggestions</h2>
+          <span class="suggestion-count" id="sugCount"></span>
+        </div>
+        <div id="suggestionsList"></div>
+
+        <!-- Suggest Movie Button -->
+        <div class="text-center mt-xl" id="suggestBtnContainer">
+          <button class="btn btn-primary btn-lg" id="suggestMovieBtn">
+            🎬 Suggest a Movie
+          </button>
+        </div>
+
+        <!-- Suggest Form (hidden by default) -->
+        <div class="suggest-form hidden" id="suggestForm">
+          <h3>🎬 Suggest a Movie</h3>
+          <form id="suggestionForm">
+            <div class="form-group">
+              <label class="form-label" for="movieName">Movie Name</label>
+              <input type="text" id="movieName" class="form-input" placeholder="e.g. Interstellar" required maxlength="200">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reason">Why do you recommend it?</label>
+              <textarea id="reason" class="form-textarea" placeholder="e.g. Great choice if you like emotional science-fiction movies with a strong story..." required minlength="10" maxlength="500"></textarea>
+              <div class="char-count"><span id="reasonCharCount">0</span>/500</div>
+            </div>
+            <div style="display:flex;gap:12px;">
+              <button type="submit" class="btn btn-primary" id="submitSuggestionBtn">Submit Suggestion</button>
+              <button type="button" class="btn btn-secondary" id="cancelSuggestBtn">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>MovieSuggest — People helping people choose movies.</p>
+    </footer>
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/request.js"></script>
+</body>
+</html>

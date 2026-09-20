@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Activity — MovieSuggest</title>
+  <meta name="description" content="View and manage your movie recommendation requests and suggestions.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#07070d">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="nav-container"></div>
+
+  <main class="page">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div>
+          <h1 class="section-title">My Activity</h1>
+          <p class="section-subtitle">Manage your requests and suggestions</p>
+        </div>
+      </div>
+
+      <!-- Auth Guard -->
+      <div class="empty-state hidden" id="authGuard">
+        <div class="empty-state-icon">🔒</div>
+        <h3 class="empty-state-title">Account Required</h3>
+        <p class="empty-state-text">You need a registered account to view your activity.</p>
+        <a href="auth.html?mode=register&redirect=activity.html" class="btn btn-primary">Create Account</a>
+        <a href="auth.html?mode=login&redirect=activity.html" class="btn btn-secondary" style="margin-left:12px;">Login</a>
+      </div>
+
+      <!-- Content (shown for registered users) -->
+      <div id="activityContent" class="hidden">
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab active" data-tab="requests">My Requests</button>
+          <button class="tab" data-tab="suggestions">My Suggestions</button>
+        </div>
+
+        <!-- My Requests Panel -->
+        <div class="tab-panel active" id="panel-requests">
+          <div id="myRequestsList">
+            <div class="loading-center">
+              <div class="spinner"></div>
+              <p>Loading your requests...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- My Suggestions Panel -->
+        <div class="tab-panel" id="panel-suggestions">
+          <div id="mySuggestionsList">
+            <div class="loading-center">
+              <div class="spinner"></div>
+              <p>Loading your suggestions...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>MovieSuggest — People helping people choose movies.</p>
+    </footer>
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/activity.js"></script>
+</body>
+</html>
