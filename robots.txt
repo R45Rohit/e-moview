@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /auth.html
 
-Sitemap: https://your-project.web.app/sitemap.xml
+Sitemap: https://e-moview.onrender.com/sitemap.xml
