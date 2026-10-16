@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  onAuthReady((user) => {
+  function updateView(user) {
     injectNav('activity');
 
-    if (!requireRegistered()) {
+    if (!user) {
       authGuard.classList.remove('hidden');
       activityContent.classList.add('hidden');
       return;
@@ -34,7 +34,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadMyRequests();
     loadMySuggestions();
+  }
+
+  onAuthReady((user) => {
+    updateView(user);
   });
+
+  const quickGuestBtn = document.getElementById('quickGuestActivityBtn');
+  if (quickGuestBtn) {
+    quickGuestBtn.addEventListener('click', async () => {
+      quickGuestBtn.disabled = true;
+      try {
+        const guest = await loginAsGuest();
+        updateView(guest);
+      } catch (e) {
+        quickGuestBtn.disabled = false;
+      }
+    });
+  }
 });
 
 // ─── Load My Requests ───

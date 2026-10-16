@@ -1,9 +1,10 @@
 // ============================================================
 // Ask Page Logic
 // Handles the recommendation request form submission
+// 100% Static & Client-Side
 // ============================================================
 
-/* global onAuthReady, injectNav, db, currentUser, requireRegistered, showToast, trackRequestCreated, firebase */
+/* global onAuthReady, injectNav, db, currentUser, loginAsGuest, showToast, trackRequestCreated, firebase */
 
 document.addEventListener('DOMContentLoaded', () => {
   const askForm = document.getElementById('askForm');
@@ -11,17 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const authGuard = document.getElementById('authGuard');
   const description = document.getElementById('description');
   const charCount = document.getElementById('charCount');
+  const quickGuestAskBtn = document.getElementById('quickGuestAskBtn');
 
   // Character count
-  description.addEventListener('input', () => {
-    charCount.textContent = description.value.length;
-  });
+  if (description && charCount) {
+    description.addEventListener('input', () => {
+      charCount.textContent = description.value.length;
+    });
+  }
 
-  onAuthReady((user) => {
+  function updateFormVisibility(user) {
     injectNav('ask');
 
-    // Auth guard — only registered users can ask
-    if (!requireRegistered()) {
+    if (!user) {
       askFormCard.classList.add('hidden');
       authGuard.classList.remove('hidden');
       return;
@@ -29,15 +32,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     askFormCard.classList.remove('hidden');
     authGuard.classList.add('hidden');
+  }
+
+  onAuthReady((user) => {
+    updateFormVisibility(user);
   });
+
+  // Quick guest handler
+  if (quickGuestAskBtn) {
+    quickGuestAskBtn.addEventListener('click', async () => {
+      quickGuestAskBtn.disabled = true;
+      quickGuestAskBtn.textContent = 'Setting up...';
+      try {
+        const guest = await loginAsGuest();
+        updateFormVisibility(guest);
+        showToast('Logged in as Guest! You can now post your request.', 'success');
+      } catch (e) {
+        quickGuestAskBtn.disabled = false;
+        quickGuestAskBtn.textContent = '👤 Continue with Quick Name';
+      }
+    });
+  }
 
   // Form submission
   askForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    if (!requireRegistered()) {
-      showAuthModal();
-      return;
+    if (!currentUser) {
+      try {
+        await loginAsGuest();
+      } catch (err) {
+        showToast('Please login or enter a name to post.', 'error');
+        return;
+      }
     }
 
     const genre = document.getElementById('genre').value;
@@ -57,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const docRef = await db.collection('requests').add({
         userId: currentUser.uid,
-        userName: currentUser.displayName || 'User',
+        userName: currentUser.displayName || (currentUser.isAnonymous ? 'Guest Movie Fan' : 'Movie Buff'),
         genre: genre,
         language: language,
         mood: mood,

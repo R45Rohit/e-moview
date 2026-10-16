@@ -3,9 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Request Details — MovieSuggest</title>
-  <meta name="description" content="View this community movie recommendation request and suggest a movie.">
+
+  <!-- Primary SEO -->
+  <title>Movie Recommendation Request Details — MovieSuggest</title>
+  <meta name="description" content="View this community movie recommendation request and see film suggestions recommended by real movie lovers. Add your own recommendation or browse suggestions.">
+  <meta name="keywords" content="movie request, movie suggestions, film recommendations, what to watch, community movie picks, movie opinions">
+  <meta name="author" content="MovieSuggest">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#07070d">
+  <link rel="canonical" href="https://e-moview.onrender.com/request.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="MovieSuggest">
+  <meta property="og:title" content="Movie Recommendation Request — MovieSuggest">
+  <meta property="og:description" content="See movie recommendations suggested by real people for this community request.">
+  <meta property="og:url" content="https://e-moview.onrender.com/request.html">
+  <meta property="og:image" content="https://e-moview.onrender.com/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Movie Recommendation Request — MovieSuggest">
+  <meta name="twitter:description" content="See movie recommendations suggested by real people for this community request.">
+  <meta name="twitter:image" content="https://e-moview.onrender.com/og-image.png">
+
+  <!-- JSON-LD Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://e-moview.onrender.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Browse", "item": "https://e-moview.onrender.com/browse.html"},
+      {"@type": "ListItem", "position": 3, "name": "Request", "item": "https://e-moview.onrender.com/request.html"}
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -42,7 +76,7 @@
           <form id="suggestionForm">
             <div class="form-group">
               <label class="form-label" for="movieName">Movie Name</label>
-              <input type="text" id="movieName" class="form-input" placeholder="e.g. Interstellar" required maxlength="200">
+              <input type="text" id="movieName" class="form-input" placeholder="e.g. Interstellar (2014)" required maxlength="200">
             </div>
             <div class="form-group">
               <label class="form-label" for="reason">Why do you recommend it?</label>
@@ -60,15 +94,15 @@
 
     <footer class="footer">
       <p>MovieSuggest — People helping people choose movies.</p>
+      <p style="margin-top:8px;font-size:0.8rem;opacity:0.5;">
+        <a href="movies.html" style="color:inherit;">🎬 Explore 200+ Top Movies</a> &nbsp;·&nbsp;
+        <a href="index.html" style="color:inherit;">Home</a> &nbsp;·&nbsp;
+        <a href="browse.html" style="color:inherit;">Browse Requests</a>
+      </p>
     </footer>
   </main>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
-  <script src="js/firebase-config.js"></script>
+  <!-- Static Store & Scripts -->
   <script src="js/auth.js"></script>
   <script src="js/analytics.js"></script>
   <script src="js/request.js"></script>

@@ -114,27 +114,30 @@
         </form>
       </div>
 
-      <!-- Auth Guard Message (shown to guests) -->
+      <!-- Auth Guard Message (shown to unauthenticated visitors) -->
       <div class="empty-state hidden fade-in" id="authGuard">
         <div class="empty-state-icon">🔒</div>
-        <h3 class="empty-state-title">Account Required</h3>
-        <p class="empty-state-text">You need a registered account to ask for movie recommendations.</p>
-        <a href="auth.html?mode=register&redirect=ask.html" class="btn btn-primary">Create Account</a>
-        <a href="auth.html?mode=login&redirect=ask.html" class="btn btn-secondary" style="margin-left:12px;">Login</a>
+        <h3 class="empty-state-title">Join to Ask for Movie Recommendations</h3>
+        <p class="empty-state-text">Create an account, login, or continue with a quick name to ask the community for movie picks.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a href="auth.html?mode=register&redirect=ask.html" class="btn btn-primary">Create Account</a>
+          <a href="auth.html?mode=login&redirect=ask.html" class="btn btn-secondary">Login</a>
+          <button class="btn btn-ghost" id="quickGuestAskBtn">👤 Continue with Quick Name</button>
+        </div>
       </div>
     </div>
 
     <footer class="footer">
       <p>MovieSuggest — People helping people choose movies.</p>
+      <p style="margin-top:8px;font-size:0.8rem;opacity:0.5;">
+        <a href="movies.html" style="color:inherit;">🎬 Explore 200+ Top Movies</a> &nbsp;·&nbsp;
+        <a href="index.html" style="color:inherit;">Home</a> &nbsp;·&nbsp;
+        <a href="browse.html" style="color:inherit;">Browse Requests</a>
+      </p>
     </footer>
   </main>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
-  <script src="js/firebase-config.js"></script>
+  <!-- Static Store & Scripts -->
   <script src="js/auth.js"></script>
   <script src="js/analytics.js"></script>
   <script src="js/ask.js"></script>

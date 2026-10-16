@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO -->
+  <title>404 — Page Not Found | MovieSuggest</title>
+  <meta name="description" content="The page you're looking for doesn't exist on MovieSuggest. Browse 200+ top movies or discover community recommendations.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#07070d">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="nav-container"></div>
+
+  <main class="page">
+    <div class="container container-narrow">
+      <div class="empty-state fade-in" style="padding: 80px 20px;">
+        <div class="empty-state-icon" style="font-size: 4rem;">🎬 404</div>
+        <h1 class="empty-state-title" style="font-size: 2rem; margin-bottom: 12px;">Scene Not Found</h1>
+        <p class="empty-state-text" style="font-size: 1.05rem; margin-bottom: 32px;">
+          Looks like this reel ran out! The page you were looking for doesn't exist or may have been moved.
+        </p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="index.html" class="btn btn-primary btn-lg">🏠 Go Home</a>
+          <a href="movies.html" class="btn btn-secondary btn-lg">🍿 Top 200+ Movies</a>
+          <a href="browse.html" class="btn btn-ghost btn-lg">🔍 Browse Requests</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>MovieSuggest — People helping people choose movies.</p>
+    </footer>
+  </main>
+
+  <!-- Static Store & Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/analytics.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      injectNav('');
+    });
+  </script>
+</body>
+</html>

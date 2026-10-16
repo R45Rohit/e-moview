@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary SEO -->
-  <title>Top 100+ Movies to Watch — Best Movie List | MovieSuggest</title>
+  <title>Top 200+ Movies to Watch — Best Movie List | MovieSuggest</title>
   <meta name="description" content="Explore our curated list of 100+ must-watch movies spanning Action, Comedy, Drama, Horror, Sci-Fi, Thriller, Romance and more. Includes Hollywood blockbusters, Bollywood hits, Korean cinema masterpieces, and Tamil classics. Find your next favourite film with ratings, genres, and descriptions.">
   <meta name="keywords" content="top 100 movies, best movies of all time, must watch movies, best Hollywood movies, best Bollywood movies list, best Korean movies, best Tamil movies, top rated movies, greatest films ever made, movie list with ratings, action movies list, comedy movies list, horror movies list, thriller movies list, sci-fi movies list, drama movies list, romance movies list, award winning movies, Oscar movies, popular movies 2024, classic movies, cult movies, movie catalogue, watch these movies, film recommendations list, Interstellar, The Dark Knight, Parasite, Inception, Avengers, Baahubali, 3 Idiots, Dangal, RRR, Oldboy">
   <meta name="author" content="MovieSuggest">
@@ -35,7 +35,7 @@
     "name": "Top 100+ Movies to Watch on MovieSuggest",
     "description": "A curated list of must-watch movies across all genres and languages.",
     "url": "https://e-moview.onrender.com/movies.html",
-    "numberOfItems": 105,
+    "numberOfItems": 205,
     "itemListElement": [
       {"@type":"ListItem","position":1,"name":"The Shawshank Redemption (1994)"},
       {"@type":"ListItem","position":2,"name":"The Godfather (1972)"},
@@ -264,6 +264,39 @@
       font-size: 1.1rem;
       grid-column: 1/-1;
     }
+    .movie-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .btn-watchlist {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+      font-family: inherit;
+    }
+    .btn-watchlist:hover, .btn-watchlist.saved {
+      background: rgba(251, 191, 36, 0.15);
+      border-color: #fbbf24;
+      color: #fbbf24;
+    }
+    .btn-suggest-link {
+      font-size: 0.76rem;
+      color: #a78bfa;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      font-weight: 500;
+    }
+    .btn-suggest-link:hover { opacity: 0.8; text-decoration: underline; }
     .movies-cta {
       background: linear-gradient(135deg, rgba(167,139,250,0.1), rgba(244,114,182,0.1));
       border: 1px solid rgba(167,139,250,0.2);
@@ -283,11 +316,11 @@
   <main class="page">
     <!-- Hero -->
     <section class="movies-hero">
-      <h1>🎬 Top 100+ Must-Watch Movies</h1>
+      <h1>🎬 Top 200+ Must-Watch Movies</h1>
       <p>A hand-curated list of the greatest films across every genre and language — from Hollywood blockbusters to Bollywood gems and Korean masterpieces.</p>
       <div class="movies-stats">
-        <span class="stat-pill">🎭 105 Movies</span>
-        <span class="stat-pill">🌍 8 Languages</span>
+        <span class="stat-pill">🎭 205 Movies</span>
+        <span class="stat-pill">🌍 12 Languages</span>
         <span class="stat-pill">🎞️ 9 Genres</span>
         <span class="stat-pill">⭐ Top IMDb Picks</span>
       </div>
@@ -298,6 +331,13 @@
       <div class="movies-controls-inner">
         <input type="search" class="movie-search" id="movieSearch"
           placeholder="🔍  Search movies, genres, languages…" aria-label="Search movies">
+        <select id="movieSort" class="filter-pill" style="outline:none; cursor:pointer;" aria-label="Sort movies">
+          <option value="rating-desc" style="background:#12121c;color:#fff;">⭐ Top Rated</option>
+          <option value="rank-asc" style="background:#12121c;color:#fff;">🏆 Rank #1 - #205</option>
+          <option value="year-desc" style="background:#12121c;color:#fff;">📅 Newest First</option>
+          <option value="year-asc" style="background:#12121c;color:#fff;">⏳ Classics First</option>
+          <option value="title-asc" style="background:#12121c;color:#fff;">🔤 Title A - Z</option>
+        </select>
         <div class="filter-pill-group" id="genreFilters" role="group" aria-label="Filter by genre">
           <button class="filter-pill active" data-filter="">All</button>
           <button class="filter-pill" data-filter="Action">Action</button>
@@ -313,13 +353,17 @@
           <button class="filter-pill" data-filter="Korean">🇰🇷 Korean</button>
           <button class="filter-pill" data-filter="Tamil">Tamil</button>
           <button class="filter-pill" data-filter="Telugu">Telugu</button>
+          <button class="filter-pill" data-filter="Malayalam">Malayalam</button>
+          <button class="filter-pill" data-filter="Marathi">Marathi</button>
+          <button class="filter-pill" data-filter="Japanese">🇯🇵 Japanese</button>
+          <button class="filter-pill" data-filter="French">🇫🇷 French</button>
         </div>
       </div>
     </div>
 
     <!-- Grid -->
     <div class="movies-container">
-      <p class="movies-count">Showing <strong id="countNum">105</strong> movies</p>
+      <p class="movies-count">Showing <strong id="countNum">205</strong> movies</p>
       <div class="movies-grid" id="moviesGrid"></div>
 
       <!-- CTA -->
@@ -473,7 +517,133 @@
     {rank:102, title:"Poor Things", year:2023, rating:7.9, genre:"Comedy", lang:"English", desc:"The incredible tale of Bella Baxter, a young woman brought back to life by an eccentric scientist, who embarks on an adventure."},
     {rank:103, title:"Killers of the Flower Moon", year:2023, rating:7.6, genre:"Crime", lang:"English", desc:"Members of the Osage tribe are murdered under mysterious circumstances in the 1920s, sparking a major FBI investigation."},
     {rank:104, title:"Saltburn", year:2023, rating:7.1, genre:"Thriller", lang:"English", desc:"A student at Oxford becomes infatuated with a charming aristocrat and the lavish estate he grew up on — with dark consequences."},
-    {rank:105, title:"Barbie", year:2023, rating:6.8, genre:"Comedy", lang:"English", desc:"Barbie and Ken are having the time of their lives in Barbieland until Barbie has a crisis that sends them to the real world."}
+    {rank:105, title:"Barbie", year:2023, rating:6.8, genre:"Comedy", lang:"English", desc:"Barbie and Ken are having the time of their lives in Barbieland until Barbie has a crisis that sends them to the real world."},
+
+    // ── MORE HOLLYWOOD ACTION ────────────────────────────────────────────
+    {rank:106, title:"Die Hard", year:1988, rating:8.2, genre:"Action", lang:"English", desc:"An NYPD officer tries to save hostages taken by German terrorists during a Christmas party at a LA skyscraper — a genre-defining classic."},
+    {rank:107, title:"Terminator 2: Judgment Day", year:1991, rating:8.6, genre:"Action", lang:"English", desc:"A cyborg is sent back in time to protect a young John Connor from a more advanced and powerful liquid-metal Terminator."},
+    {rank:108, title:"The Bourne Identity", year:2002, rating:7.9, genre:"Action", lang:"English", desc:"A man rescued at sea with no memory discovers he is a trained CIA assassin as agents relentlessly hunt him down."},
+    {rank:109, title:"Mission: Impossible – Fallout", year:2018, rating:7.7, genre:"Action", lang:"English", desc:"Ethan Hunt and his IMF team must deliver plutonium cores to prevent global destruction — the best stunt-driven action film of the decade."},
+    {rank:110, title:"Gladiator", year:2000, rating:8.5, genre:"Action", lang:"English", desc:"A Roman general is betrayed and his family murdered by a corrupt prince. Sold into slavery, he becomes a gladiator and seeks revenge."},
+    {rank:111, title:"Heat", year:1995, rating:8.3, genre:"Crime", lang:"English", desc:"A group of professional bank robbers are pursued by a tenacious detective. Features the iconic diner confrontation between Pacino and De Niro."},
+    {rank:112, title:"Sicario", year:2015, rating:7.6, genre:"Thriller", lang:"English", desc:"An idealistic FBI agent is enlisted by a government task force to help take down a drug cartel on the U.S.-Mexico border."},
+    {rank:113, title:"The Revenant", year:2015, rating:8.0, genre:"Action", lang:"English", desc:"A fur trapper survives a brutal bear attack and seeks harrowing revenge against those who left him for dead in the American wilderness."},
+    {rank:114, title:"Gran Torino", year:2008, rating:8.1, genre:"Drama", lang:"English", desc:"A retired auto worker forms an unlikely bond with a young Hmong neighbour after preventing him from stealing his prized car."},
+    {rank:115, title:"Black Hawk Down", year:2001, rating:7.7, genre:"Action", lang:"English", desc:"An elite group of U.S. soldiers drop into Somalia's capital to capture a warlord and are trapped in a fierce, brutal urban battle."},
+
+    // ── MORE HOLLYWOOD DRAMA ─────────────────────────────────────────────
+    {rank:116, title:"The Pursuit of Happyness", year:2006, rating:8.0, genre:"Drama", lang:"English", desc:"A struggling salesman and his young son are evicted and end up homeless while he fights to become a stockbroker at a top firm."},
+    {rank:117, title:"Cast Away", year:2000, rating:7.8, genre:"Drama", lang:"English", desc:"A FedEx executive must transform himself physically and emotionally to survive on a deserted island after a plane crash over the ocean."},
+    {rank:118, title:"Into the Wild", year:2007, rating:8.1, genre:"Drama", lang:"English", desc:"After graduating, Christopher McCandless donates his savings to charity and hitchhikes to Alaska to live alone in the wilderness."},
+    {rank:119, title:"The Social Network", year:2010, rating:7.7, genre:"Drama", lang:"English", desc:"The story of how Mark Zuckerberg and his Harvard roommates founded Facebook — and the bitter lawsuits that followed."},
+    {rank:120, title:"American History X", year:1998, rating:8.5, genre:"Drama", lang:"English", desc:"A former neo-Nazi skinhead tries to prevent his younger brother from going down the same path after serving time in prison."},
+    {rank:121, title:"Rain Man", year:1988, rating:8.0, genre:"Drama", lang:"English", desc:"A selfish yuppie discovers he has an autistic savant brother and takes him on a cross-country road trip to exploit his abilities."},
+    {rank:122, title:"Braveheart", year:1995, rating:8.4, genre:"Drama", lang:"English", desc:"William Wallace, a Scottish commoner, leads his countrymen in a rebellion to free his homeland from English tyranny."},
+    {rank:123, title:"Boyhood", year:2014, rating:7.9, genre:"Drama", lang:"English", desc:"A coming-of-age story filmed over 12 years with the same cast, following a boy from age 6 to 18 in a remarkable cinematic experiment."},
+    {rank:124, title:"Manchester by the Sea", year:2016, rating:7.8, genre:"Drama", lang:"English", desc:"A depressed uncle returns home to care for his nephew after his brother dies, unearthing overwhelmingly painful memories."},
+    {rank:125, title:"Philadelphia", year:1993, rating:7.7, genre:"Drama", lang:"English", desc:"A successful lawyer hides his AIDS diagnosis from his homophobic employers, who fire him anyway. He sues with help from a reluctant lawyer."},
+
+    // ── MORE HOLLYWOOD THRILLER / MYSTERY ────────────────────────────────
+    {rank:126, title:"Zodiac", year:2007, rating:7.7, genre:"Thriller", lang:"English", desc:"A cartoonist becomes obsessed with tracking down the Zodiac killer, a serial killer who terrorised San Francisco in the late 1960s."},
+    {rank:127, title:"The Prestige", year:2006, rating:8.5, genre:"Thriller", lang:"English", desc:"Two rival stage magicians in turn-of-the-century London engage in a bitter battle to create the ultimate, impossible illusion."},
+    {rank:128, title:"Shutter Island", year:2010, rating:8.1, genre:"Thriller", lang:"English", desc:"In 1954, a U.S. Marshal investigates the disappearance of a patient from a hospital for the criminally insane. Nothing is as it seems."},
+    {rank:129, title:"Memento", year:2000, rating:8.4, genre:"Thriller", lang:"English", desc:"A man with short-term memory loss attempts to track down his wife's murderer using polaroid photos and body tattoos as clues."},
+    {rank:130, title:"Nightcrawler", year:2014, rating:7.8, genre:"Thriller", lang:"English", desc:"A driven young man learns that crime journalism in L.A. is a brutal competition and sets out to become the best — at any moral cost."},
+    {rank:131, title:"The Sixth Sense", year:1999, rating:8.1, genre:"Thriller", lang:"English", desc:"A child psychologist helps a troubled boy who claims to see dead people, leading to one of cinema's most iconic twist endings."},
+    {rank:132, title:"Black Swan", year:2010, rating:8.0, genre:"Thriller", lang:"English", desc:"A ballet dancer's obsession with perfection and rivalry with a new dancer drives her to the edge of madness — Natalie Portman is stunning."},
+    {rank:133, title:"Prisoners", year:2013, rating:8.1, genre:"Thriller", lang:"English", desc:"When his daughter goes missing, a desperate father takes matters into his own hands while a detective follows the evidence."},
+
+    // ── MORE HOLLYWOOD SCI-FI ─────────────────────────────────────────────
+    {rank:134, title:"Gravity", year:2013, rating:7.7, genre:"Sci-Fi", lang:"English", desc:"Two astronauts work together to survive after an accident leaves them stranded adrift in the utter silence of deep space."},
+    {rank:135, title:"The Martian", year:2015, rating:8.0, genre:"Sci-Fi", lang:"English", desc:"An astronaut is presumed dead and stranded on Mars. He must use his ingenuity to survive while NASA works to bring him home."},
+    {rank:136, title:"Children of Men", year:2006, rating:7.9, genre:"Sci-Fi", lang:"English", desc:"In a chaotic near-future where humans can no longer reproduce, a bureaucrat must guide a miraculously pregnant woman to safety."},
+    {rank:137, title:"District 9", year:2009, rating:7.9, genre:"Sci-Fi", lang:"English", desc:"Extraterrestrials forced to live in slum-like conditions find a kindred spirit in a government agent who is transformed by their technology."},
+    {rank:138, title:"Annihilation", year:2018, rating:6.8, genre:"Sci-Fi", lang:"English", desc:"A biologist signs up for a dangerous expedition into a mysterious zone where the laws of nature and reality no longer apply."},
+    {rank:139, title:"Moon", year:2009, rating:7.9, genre:"Sci-Fi", lang:"English", desc:"A solitary astronaut nearing the end of his three-year mining contract on the Moon makes a deeply unsettling personal discovery."},
+    {rank:140, title:"Minority Report", year:2002, rating:7.6, genre:"Sci-Fi", lang:"English", desc:"In a future where police can arrest murderers before they strike, an officer is himself accused of a future murder and must flee."},
+
+    // ── MORE HOLLYWOOD HORROR ─────────────────────────────────────────────
+    {rank:141, title:"It Chapter One", year:2017, rating:7.3, genre:"Horror", lang:"English", desc:"A group of bullied kids band together to destroy a shapeshifting monster that has been terrorising their town as Pennywise the Dancing Clown."},
+    {rank:142, title:"Alien", year:1979, rating:8.5, genre:"Horror", lang:"English", desc:"After a space merchant vessel investigates an unknown transmission, the crew discovers a deadly life form that picks them off one by one."},
+    {rank:143, title:"The Thing", year:1982, rating:8.2, genre:"Horror", lang:"English", desc:"American researchers in Antarctica are confronted by a shape-shifting alien that assumes the perfect appearance of its victims."},
+    {rank:144, title:"The Witch", year:2015, rating:6.9, genre:"Horror", lang:"English", desc:"A Puritan family banished to a remote New England wilderness must confront the forces of evil when their newborn son vanishes."},
+    {rank:145, title:"Us", year:2019, rating:6.8, genre:"Horror", lang:"English", desc:"A family's peaceful beach vacation turns to terror when their doppelgangers appear and begin methodically terrorising them."},
+
+    // ── MORE HOLLYWOOD COMEDY / ROMANCE ──────────────────────────────────
+    {rank:146, title:"Groundhog Day", year:1993, rating:8.0, genre:"Comedy", lang:"English", desc:"A cynical TV weatherman is mysteriously forced to relive the same day over and over again until he learns to become a better person."},
+    {rank:147, title:"Home Alone", year:1990, rating:7.7, genre:"Comedy", lang:"English", desc:"When a boy is accidentally left behind, he must fend off two bungling burglars from his home on Christmas Eve."},
+    {rank:148, title:"Catch Me If You Can", year:2002, rating:8.1, genre:"Crime", lang:"English", desc:"A true story about a young con man who successfully poses as a pilot, doctor, and attorney before being caught by the FBI."},
+    {rank:149, title:"The Big Lebowski", year:1998, rating:8.1, genre:"Comedy", lang:"English", desc:"Jeff 'The Dude' Lebowski is mistaken for a millionaire of the same name and embroiled in a hilarious, bizarre kidnapping plot."},
+    {rank:150, title:"Midnight in Paris", year:2011, rating:7.7, genre:"Romance", lang:"English", desc:"A nostalgic American writer in Paris finds himself transported back to the 1920s at midnight, encountering literary giants."},
+
+    // ── BOLLYWOOD HINDI (MORE) ────────────────────────────────────────────
+    {rank:151, title:"Dilwale Dulhania Le Jayenge", year:1995, rating:8.0, genre:"Romance", lang:"Hindi", desc:"Raj and Simran fall in love on a European trip, but her traditional father has already arranged her marriage. A defining Bollywood romance."},
+    {rank:152, title:"Sholay", year:1975, rating:8.2, genre:"Action", lang:"Hindi", desc:"Two criminals are hired by a retired police officer to help capture a ruthless dacoit who has terrorised his village. An all-time Indian classic."},
+    {rank:153, title:"Deewar", year:1975, rating:8.0, genre:"Drama", lang:"Hindi", desc:"Two brothers — one a smuggler, one a cop — find themselves on opposite sides of the law in this iconic Amitabh Bachchan drama."},
+    {rank:154, title:"Rang De Basanti", year:2006, rating:8.2, genre:"Drama", lang:"Hindi", desc:"A group of cynical college friends find their views on India's corrupt political system dramatically changed by reenacting revolutionary history."},
+    {rank:155, title:"Swades", year:2004, rating:8.2, genre:"Drama", lang:"Hindi", desc:"A successful NASA scientist returns to India to bring his childhood nanny to the U.S. but finds himself reconnecting with his roots."},
+    {rank:156, title:"Kahaani", year:2012, rating:8.1, genre:"Thriller", lang:"Hindi", desc:"A pregnant woman arrives in Kolkata to search for her missing husband and uncovers a massive, deadly conspiracy in this twisty thriller."},
+    {rank:157, title:"Stree", year:2018, rating:7.5, genre:"Horror", lang:"Hindi", desc:"A spirit that abducts men haunts a small town in this clever horror-comedy that plays brilliantly on Indian folklore and superstition."},
+    {rank:158, title:"Lunchbox", year:2013, rating:7.8, genre:"Romance", lang:"Hindi", desc:"A mistaken lunchbox delivery begins a correspondence between a lonely housewife and a widower both searching for connection."},
+    {rank:159, title:"Paan Singh Tomar", year:2012, rating:8.2, genre:"Drama", lang:"Hindi", desc:"A national athletics champion is forced by social injustice to become a feared rebel dacoit in the Chambal Valley ravines."},
+    {rank:160, title:"Chak De India", year:2007, rating:8.2, genre:"Drama", lang:"Hindi", desc:"A disgraced ex-hockey player becomes coach of the Indian women's national hockey team and leads them to World Cup triumph."},
+    {rank:161, title:"Mother India", year:1957, rating:7.8, genre:"Drama", lang:"Hindi", desc:"An impoverished village woman struggles to raise her sons in the absence of her husband — a cornerstone of Indian cinema history."},
+    {rank:162, title:"Masaan", year:2015, rating:8.1, genre:"Drama", lang:"Hindi", desc:"Four people on the banks of the Ganges in Varanasi are each struggling in different ways to escape the weight of their past."},
+    {rank:163, title:"Article 15", year:2019, rating:8.2, genre:"Drama", lang:"Hindi", desc:"An IPS officer investigates the rape and murder of two lower-caste girls in a village, uncovering deep-rooted caste discrimination."},
+    {rank:164, title:"Super 30", year:2019, rating:7.4, genre:"Drama", lang:"Hindi", desc:"Mathematician Anand Kumar coaches 30 brilliant but underprivileged students to crack the prestigious IIT-JEE entrance exam."},
+    {rank:165, title:"Zindagi Na Milegi Dobara", year:2011, rating:8.2, genre:"Drama", lang:"Hindi", desc:"Three friends embark on a bachelor road trip across Spain, confronting their deepest fears and past relationships along the way."},
+
+    // ── MALAYALAM CINEMA ──────────────────────────────────────────────────
+    {rank:166, title:"Drishyam 2", year:2021, rating:8.4, genre:"Thriller", lang:"Malayalam", desc:"Years after Georgekutty's cunning plan saved his family, the case is reopened when an IG discovers new, damning evidence."},
+    {rank:167, title:"Kumbalangi Nights", year:2019, rating:8.4, genre:"Drama", lang:"Malayalam", desc:"Four dysfunctional brothers in a fishing village must confront their past and each other in this beautifully observed drama."},
+    {rank:168, title:"Jallikattu", year:2019, rating:7.5, genre:"Thriller", lang:"Malayalam", desc:"A buffalo escapes a slaughterhouse and terrorises a village, causing the entire community to descend into chaos and primal violence."},
+    {rank:169, title:"Bangalore Days", year:2014, rating:8.2, genre:"Drama", lang:"Malayalam", desc:"Three cousins move to Bangalore and navigate their new lives, loves, and careers in this warm, widely-beloved ensemble drama."},
+    {rank:170, title:"Lucifer", year:2019, rating:7.6, genre:"Action", lang:"Malayalam", desc:"An enigmatic stranger gets involved in a political power struggle following a Chief Minister's death, with shocking revelations."},
+    {rank:171, title:"Maheshinte Prathikaaram", year:2016, rating:8.3, genre:"Comedy", lang:"Malayalam", desc:"A small-town photo studio owner vows not to wear footwear until he takes revenge for a public humiliation — a charming, warm gem."},
+    {rank:172, title:"Sudani from Nigeria", year:2018, rating:8.3, genre:"Drama", lang:"Malayalam", desc:"A Nigerian footballer is injured while playing in Kerala. His coach takes him in, forging an unexpected cross-cultural friendship."},
+    {rank:173, title:"Ustad Hotel", year:2012, rating:8.2, genre:"Drama", lang:"Malayalam", desc:"A young chef returns to Kerala and reconnects with his grandfather, a humble old hotel owner, discovering his true passion for food."},
+    {rank:174, title:"Premam", year:2015, rating:8.3, genre:"Romance", lang:"Malayalam", desc:"The story of a man's three distinct, heartfelt love stories across different stages of life from school to adulthood."},
+    {rank:175, title:"Charlie (2015)", year:2015, rating:7.9, genre:"Romance", lang:"Malayalam", desc:"A free-spirited woman searches for a mysterious man named Charlie, piecing together his identity from the lives he has touched."},
+
+    // ── MARATHI CINEMA ────────────────────────────────────────────────────
+    {rank:176, title:"Sairat", year:2016, rating:8.3, genre:"Romance", lang:"Marathi", desc:"A sweeping inter-caste love story between a fisherman's son and a landlord's daughter that ends in a devastating, unforgettable tragedy."},
+    {rank:177, title:"Fandry", year:2013, rating:8.0, genre:"Drama", lang:"Marathi", desc:"A Dalit teenager falls in love with an upper-caste girl in this searingly honest examination of caste discrimination in rural Maharashtra."},
+    {rank:178, title:"Natsamrat", year:2016, rating:8.4, genre:"Drama", lang:"Marathi", desc:"A legendary Marathi stage actor retires from the limelight but must cope with indifference from his own family — a towering performance."},
+    {rank:179, title:"Katyar Kaljat Ghusali", year:2015, rating:8.5, genre:"Drama", lang:"Marathi", desc:"Two musicians compete across generations in this musical drama about the Hindustani classical tradition and passion for art."},
+    {rank:180, title:"Court", year:2014, rating:8.0, genre:"Drama", lang:"Marathi", desc:"A folk singer is arrested on charges of abetment to suicide in this acutely observed, slow-burn examination of the Indian legal system."},
+
+    // ── MORE KOREAN CINEMA ────────────────────────────────────────────────
+    {rank:181, title:"A Bittersweet Life", year:2005, rating:7.8, genre:"Action", lang:"Korean", desc:"A gangster enforcer is ordered to watch his boss's girlfriend. When he disobeys a direct order, brutal and stylish consequences follow."},
+    {rank:182, title:"The Man from Nowhere", year:2010, rating:7.8, genre:"Action", lang:"Korean", desc:"A former operative becomes the only hope for a young girl kidnapped by organ traffickers and ruthless drug dealers."},
+    {rank:183, title:"Decision to Leave", year:2022, rating:7.3, genre:"Thriller", lang:"Korean", desc:"A detective becomes romantically entangled with the main suspect in his murder investigation — Park Chan-wook at his most elegant."},
+    {rank:184, title:"Broker", year:2022, rating:7.0, genre:"Drama", lang:"Korean", desc:"Two men who sell babies abandoned at churches form an unexpected bond with a young mother and her newborn son."},
+    {rank:185, title:"Minari", year:2020, rating:7.5, genre:"Drama", lang:"Korean", desc:"A Korean-American family moves to a small Arkansas farm to start a new life, struggling with ambition, cultural identity, and belonging."},
+
+    // ── JAPANESE CINEMA ────────────────────────────────────────────────────
+    {rank:186, title:"Seven Samurai", year:1954, rating:8.6, genre:"Action", lang:"Japanese", desc:"A poor village under attack by bandits recruits seven masterless samurai to help defend their land — Kurosawa's defining masterpiece."},
+    {rank:187, title:"Rashomon", year:1950, rating:8.2, genre:"Drama", lang:"Japanese", desc:"The murder of a samurai is described in four different, contradictory versions — a profound meditation on truth and human nature."},
+    {rank:188, title:"Harakiri", year:1962, rating:8.6, genre:"Drama", lang:"Japanese", desc:"A ronin arrives at a feudal lord's palace to perform ritual suicide, but instead exposes a horrifying injustice against samurai honour."},
+    {rank:189, title:"Grave of the Fireflies", year:1988, rating:8.5, genre:"Animation", lang:"Japanese", desc:"Two orphaned siblings struggle to survive in Japan during the final months of WWII — one of cinema's most emotionally devastating films."},
+    {rank:190, title:"Howl's Moving Castle", year:2004, rating:8.2, genre:"Animation", lang:"Japanese", desc:"A young woman cursed to become an old woman by a witch seeks help from the wizard Howl who lives in a spectacular walking castle."},
+
+    // ── EUROPEAN & WORLD CINEMA ────────────────────────────────────────────
+    {rank:191, title:"The Lives of Others", year:2006, rating:8.4, genre:"Thriller", lang:"German", desc:"An East German Stasi officer surveils a playwright and his girlfriend but gradually becomes sympathetic to their cause — Oscar Best Foreign Film."},
+    {rank:192, title:"Capernaum", year:2018, rating:8.4, genre:"Drama", lang:"Arabic", desc:"A 12-year-old boy sues his parents for the misery they have caused him, in this powerful, raw portrait of poverty in Beirut."},
+    {rank:193, title:"A Separation", year:2011, rating:8.3, genre:"Drama", lang:"Persian", desc:"An Iranian couple struggle with the morality of separating amid conflicts with family, religion, and law — an Oscar-winning masterwork."},
+    {rank:194, title:"Wild Tales", year:2014, rating:8.1, genre:"Comedy", lang:"Spanish", desc:"Six dark comedy segments explore themes of revenge, justice, and social pressure in vividly entertaining modern-day Argentina."},
+    {rank:195, title:"Blue is the Warmest Colour", year:2013, rating:7.7, genre:"Romance", lang:"French", desc:"A teenage girl's coming-of-age story follows her passionate relationship with an older art student and her journey to self-discovery."},
+
+    // ── 2024 BLOCKBUSTERS ─────────────────────────────────────────────────
+    {rank:196, title:"Dune: Part Two", year:2024, rating:8.5, genre:"Sci-Fi", lang:"English", desc:"Paul Atreides unites with the Fremen while seeking revenge against the conspirators who destroyed his family — a visually stunning epic."},
+    {rank:197, title:"Monkey Man", year:2024, rating:7.0, genre:"Action", lang:"English", desc:"A young man plans revenge against the corrupt leaders who killed his mother in this India-set, intensely personal action thriller."},
+    {rank:198, title:"Civil War", year:2024, rating:7.3, genre:"Thriller", lang:"English", desc:"A team of war journalists race across a divided America to reach Washington before rebel factions close in on the capital."},
+    {rank:199, title:"Inside Out 2", year:2024, rating:7.8, genre:"Animation", lang:"English", desc:"Riley enters adolescence and new emotions — Anxiety, Envy, Ennui, and Embarrassment — move into Headquarters and create chaos."},
+    {rank:200, title:"Alien: Romulus", year:2024, rating:7.3, genre:"Horror", lang:"English", desc:"A group of young space colonisers come face to face with the most terrifying life form in the universe on an abandoned space station."},
+    {rank:201, title:"Deadpool & Wolverine", year:2024, rating:7.8, genre:"Action", lang:"English", desc:"Deadpool is recruited by the TVA and teams up with a reluctant Wolverine on a universe-saving mission — Marvel's wildest film yet."},
+    {rank:202, title:"Furiosa: A Mad Max Saga", year:2024, rating:7.7, genre:"Action", lang:"English", desc:"The origin story of Imperator Furiosa — her capture by a brutal warlord and her relentless quest to return home across the Wasteland."},
+    {rank:203, title:"The Substance", year:2024, rating:7.4, genre:"Horror", lang:"English", desc:"A faded celebrity uses a black market drug that creates a perfect younger version of herself, with increasingly disturbing and gory results."},
+    {rank:204, title:"Conclave", year:2024, rating:7.5, genre:"Thriller", lang:"English", desc:"A cardinal oversees a secret conclave to elect a new Pope and discovers a trail of shocking secrets about the candidates."},
+    {rank:205, title:"The Wild Robot", year:2024, rating:8.3, genre:"Animation", lang:"English", desc:"A robot marooned on an uninhabited island must learn to adapt to the wilderness and bonds with the animals — a beautiful, tearful film."}
   ];
 
   const GENRE_CLASSES = {
@@ -484,6 +654,9 @@
 
   function buildCard(m) {
     const genreClass = GENRE_CLASSES[m.genre] || 'tag-drama';
+    const isSaved = typeof MovieStore !== 'undefined' && MovieStore.isInWatchlist(m.title);
+    const escapedTitle = m.title.replace(/'/g, "\\'");
+
     return `<article class="movie-card" data-genre="${m.genre}" data-lang="${m.lang}"
       itemscope itemtype="https://schema.org/Movie">
       <div class="movie-card-header">
@@ -500,9 +673,28 @@
           <span class="movie-tag ${genreClass}" itemprop="genre">${m.genre}</span>
           <span class="movie-tag tag-lang">🌐 ${m.lang}</span>
         </div>
+        <div class="movie-card-footer">
+          <button class="btn-watchlist ${isSaved ? 'saved' : ''}" onclick="toggleMovieWatchlist('${escapedTitle}', this)" aria-label="Save to Watchlist">
+            ${isSaved ? '★ In Watchlist' : '☆ Watchlist'}
+          </button>
+          <a href="browse.html?q=${encodeURIComponent(m.title)}" class="btn-suggest-link">Find Requests →</a>
+        </div>
       </div>
     </article>`;
   }
+
+  window.toggleMovieWatchlist = function(title, btn) {
+    if (typeof MovieStore !== 'undefined') {
+      const added = MovieStore.toggleWatchlist(title);
+      if (added) {
+        btn.classList.add('saved');
+        btn.textContent = '★ In Watchlist';
+      } else {
+        btn.classList.remove('saved');
+        btn.textContent = '☆ Watchlist';
+      }
+    }
+  };
 
   function renderMovies(list) {
     const grid = document.getElementById('moviesGrid');
@@ -516,7 +708,9 @@
     const q = document.getElementById('movieSearch').value.toLowerCase().trim();
     const activeBtn = document.querySelector('#genreFilters .filter-pill.active');
     const f = activeBtn ? activeBtn.dataset.filter : '';
-    let list = MOVIES;
+    const sortVal = document.getElementById('movieSort') ? document.getElementById('movieSort').value : 'rating-desc';
+
+    let list = [...MOVIES];
     if (f) list = list.filter(m => m.genre === f || m.lang === f);
     if (q) list = list.filter(m =>
       m.title.toLowerCase().includes(q) ||
@@ -524,23 +718,48 @@
       m.genre.toLowerCase().includes(q) ||
       m.lang.toLowerCase().includes(q)
     );
+
+    // Apply Sorting
+    if (sortVal === 'rating-desc') {
+      list.sort((a, b) => b.rating - a.rating || a.rank - b.rank);
+    } else if (sortVal === 'rank-asc') {
+      list.sort((a, b) => a.rank - b.rank);
+    } else if (sortVal === 'year-desc') {
+      list.sort((a, b) => b.year - a.year || b.rating - a.rating);
+    } else if (sortVal === 'year-asc') {
+      list.sort((a, b) => a.year - b.year || b.rating - a.rating);
+    } else if (sortVal === 'title-asc') {
+      list.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
     renderMovies(list);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    if (typeof injectNav === 'function') injectNav('');
+    if (typeof injectNav === 'function') injectNav('movies');
     renderMovies(MOVIES);
 
-    document.getElementById('genreFilters').addEventListener('click', e => {
-      const btn = e.target.closest('.filter-pill');
-      if (!btn) return;
-      document.querySelectorAll('#genreFilters .filter-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filterMovies();
-    });
+    const genreFilters = document.getElementById('genreFilters');
+    if (genreFilters) {
+      genreFilters.addEventListener('click', e => {
+        const btn = e.target.closest('.filter-pill');
+        if (!btn) return;
+        document.querySelectorAll('#genreFilters .filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterMovies();
+      });
+    }
 
-    document.getElementById('movieSearch').addEventListener('input', filterMovies);
+    const movieSearch = document.getElementById('movieSearch');
+    if (movieSearch) movieSearch.addEventListener('input', filterMovies);
+
+    const movieSort = document.getElementById('movieSort');
+    if (movieSort) movieSort.addEventListener('change', filterMovies);
   });
   </script>
+
+  <!-- Static Store & Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/analytics.js"></script>
 </body>
 </html>

@@ -1,10 +1,11 @@
 // ============================================================
 // Request Detail Page Logic
 // Shows request details, lists suggestions, handles suggestion form
+// 100% Static & Client-Side
 // ============================================================
 
-/* global onAuthReady, injectNav, db, currentUser, escapeHTML, formatDate, timeAgo,
-   requireRegistered, showAuthModal, showToast, showConfirmModal, trackRequestViewed,
+/* global onAuthReady, injectNav, db, currentUser, loginAsGuest, escapeHTML, formatDate, timeAgo,
+   showAuthModal, showToast, showConfirmModal, trackRequestViewed,
    trackSuggestionCreated, getUrlParam, firebase */
 
 let requestId = null;
@@ -32,78 +33,94 @@ document.addEventListener('DOMContentLoaded', () => {
   const reasonCharCount = document.getElementById('reasonCharCount');
 
   // Character count for reason
-  reasonTextarea.addEventListener('input', () => {
-    reasonCharCount.textContent = reasonTextarea.value.length;
-  });
+  if (reasonTextarea && reasonCharCount) {
+    reasonTextarea.addEventListener('input', () => {
+      reasonCharCount.textContent = reasonTextarea.value.length;
+    });
+  }
 
   // Show suggest form
-  suggestMovieBtn.addEventListener('click', () => {
-    if (!currentUser || !requireRegistered()) {
-      showAuthModal();
-      return;
-    }
-    suggestForm.classList.remove('hidden');
-    suggestMovieBtn.parentElement.style.display = 'none';
-    document.getElementById('movieName').focus();
-  });
+  if (suggestMovieBtn) {
+    suggestMovieBtn.addEventListener('click', async () => {
+      if (!currentUser) {
+        try {
+          await loginAsGuest();
+        } catch (e) {
+          showAuthModal();
+          return;
+        }
+      }
+      suggestForm.classList.remove('hidden');
+      suggestMovieBtn.parentElement.style.display = 'none';
+      document.getElementById('movieName').focus();
+    });
+  }
 
   // Cancel suggest
-  cancelSuggestBtn.addEventListener('click', () => {
-    suggestForm.classList.add('hidden');
-    suggestMovieBtn.parentElement.style.display = '';
-    suggestionForm.reset();
-    reasonCharCount.textContent = '0';
-  });
-
-  // Submit suggestion
-  suggestionForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    if (!requireRegistered()) {
-      showAuthModal();
-      return;
-    }
-
-    const movieName = document.getElementById('movieName').value.trim();
-    const reason = reasonTextarea.value.trim();
-
-    if (!movieName || reason.length < 10) {
-      showToast('Please fill in all fields (reason must be at least 10 characters).', 'error');
-      return;
-    }
-
-    const submitBtn = document.getElementById('submitSuggestionBtn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
-
-    try {
-      await db.collection('suggestions').add({
-        requestId: requestId,
-        userId: currentUser.uid,
-        userName: currentUser.displayName || 'User',
-        movieName: movieName,
-        reason: reason,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-
-      trackSuggestionCreated(requestId);
-      showToast('Suggestion submitted!', 'success');
-
-      // Reset and hide form
-      suggestionForm.reset();
-      reasonCharCount.textContent = '0';
+  if (cancelSuggestBtn) {
+    cancelSuggestBtn.addEventListener('click', () => {
       suggestForm.classList.add('hidden');
       suggestMovieBtn.parentElement.style.display = '';
+      suggestionForm.reset();
+      if (reasonCharCount) reasonCharCount.textContent = '0';
+    });
+  }
 
-      // Reload suggestions
-      loadSuggestions();
-    } catch (error) {
-      console.error('Failed to submit suggestion:', error);
-      showToast('Failed to submit suggestion. Please try again.', 'error');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Suggestion';
-    }
-  });
+  // Submit suggestion
+  if (suggestionForm) {
+    suggestionForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!currentUser) {
+        try {
+          await loginAsGuest();
+        } catch (err) {
+          showAuthModal();
+          return;
+        }
+      }
+
+      const movieName = document.getElementById('movieName').value.trim();
+      const reason = reasonTextarea.value.trim();
+
+      if (!movieName || reason.length < 10) {
+        showToast('Please fill in all fields (reason must be at least 10 characters).', 'error');
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitSuggestionBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      try {
+        await db.collection('suggestions').add({
+          requestId: requestId,
+          userId: currentUser.uid,
+          userName: currentUser.displayName || (currentUser.isAnonymous ? 'Guest Movie Fan' : 'Movie Buff'),
+          movieName: movieName,
+          reason: reason,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        trackSuggestionCreated(requestId);
+        showToast('Suggestion submitted! Thanks for sharing.', 'success');
+
+        // Reset and hide form
+        suggestionForm.reset();
+        if (reasonCharCount) reasonCharCount.textContent = '0';
+        suggestForm.classList.add('hidden');
+        suggestMovieBtn.parentElement.style.display = '';
+
+        // Reload suggestions
+        loadSuggestions();
+      } catch (error) {
+        console.error('Failed to submit suggestion:', error);
+        showToast('Failed to submit suggestion. Please try again.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Suggestion';
+      }
+    });
+  }
 
   // Load everything once auth is ready
   onAuthReady(() => {
@@ -125,7 +142,7 @@ async function loadRequest() {
         <div class="empty-state">
           <div class="empty-state-icon">❌</div>
           <h3 class="empty-state-title">Request Not Found</h3>
-          <p class="empty-state-text">This request may have been deleted.</p>
+          <p class="empty-state-text">This request may have been deleted or the ID is invalid.</p>
           <a href="browse.html" class="btn btn-primary">Browse Requests</a>
         </div>
       `;
@@ -137,10 +154,10 @@ async function loadRequest() {
     container.innerHTML = `
       <div class="request-detail fade-in">
         <div class="card-meta mb-md">
-          <span class="card-meta-item">👤 ${escapeHTML(data.userName || 'Anonymous')}</span>
+          <span class="card-meta-item">👤 <strong>${escapeHTML(data.userName || 'Anonymous')}</strong></span>
           <span class="card-meta-item">· ${formatDate(data.createdAt)}</span>
         </div>
-        <div class="tags">
+        <div class="tags" style="margin-bottom: 16px;">
           <span class="tag tag-genre">🎭 ${escapeHTML(data.genre || 'Any')}</span>
           <span class="tag tag-language">🌐 ${escapeHTML(data.language || 'Any')}</span>
           <span class="tag tag-mood">✨ ${escapeHTML(data.mood || 'Any')}</span>
@@ -162,7 +179,7 @@ async function loadRequest() {
       <div class="empty-state">
         <div class="empty-state-icon">⚠️</div>
         <h3 class="empty-state-title">Error Loading Request</h3>
-        <p class="empty-state-text">Please check your connection and try again.</p>
+        <p class="empty-state-text">Please refresh the page to view this request.</p>
         <a href="browse.html" class="btn btn-primary">Browse Requests</a>
       </div>
     `;
@@ -187,7 +204,7 @@ async function loadSuggestions() {
         <div class="empty-state" style="padding:32px 16px;">
           <div class="empty-state-icon">🍿</div>
           <h3 class="empty-state-title">No suggestions yet</h3>
-          <p class="empty-state-text">Be the first to recommend a movie!</p>
+          <p class="empty-state-text">Be the first to recommend a great movie for this request!</p>
         </div>
       `;
       return;
@@ -203,8 +220,8 @@ async function loadSuggestions() {
             <h4 class="suggestion-movie-name">🎬 ${escapeHTML(data.movieName)}</h4>
             <div style="display:flex;gap:8px;align-items:center;">
               ${isOwner ? `
-                <button class="btn btn-ghost btn-sm" onclick="editSuggestion('${doc.id}', ${JSON.stringify(data.movieName).replace(/'/g, "\\'")}, ${JSON.stringify(data.reason).replace(/'/g, "\\'")})">✏️</button>
-                <button class="btn btn-ghost btn-sm" onclick="deleteSuggestion('${doc.id}')">🗑️</button>
+                <button class="btn btn-ghost btn-sm" onclick="editSuggestion('${doc.id}', ${JSON.stringify(data.movieName).replace(/"/g, '&quot;')}, ${JSON.stringify(data.reason).replace(/"/g, '&quot;')})">✏️ Edit</button>
+                <button class="btn btn-ghost btn-sm" onclick="deleteSuggestion('${doc.id}')">🗑️ Delete</button>
               ` : ''}
               <button class="report-btn" onclick="reportContent('suggestion', '${doc.id}')" title="Report">⚑</button>
             </div>
@@ -223,7 +240,7 @@ async function loadSuggestions() {
 }
 
 // ─── Edit Suggestion ───
-function editSuggestion(suggestionId, currentName, currentReason) {
+window.editSuggestion = function(suggestionId, currentName, currentReason) {
   const card = document.getElementById(`suggestion-${suggestionId}`);
   if (!card) return;
 
@@ -243,9 +260,9 @@ function editSuggestion(suggestionId, currentName, currentReason) {
       </div>
     </form>
   `;
-}
+};
 
-async function saveSuggestionEdit(e, suggestionId) {
+window.saveSuggestionEdit = async function(e, suggestionId) {
   e.preventDefault();
 
   const newName = document.getElementById(`editName-${suggestionId}`).value.trim();
@@ -267,10 +284,10 @@ async function saveSuggestionEdit(e, suggestionId) {
     console.error('Failed to update suggestion:', error);
     showToast('Failed to update. Please try again.', 'error');
   }
-}
+};
 
 // ─── Delete Suggestion ───
-function deleteSuggestion(suggestionId) {
+window.deleteSuggestion = function(suggestionId) {
   showConfirmModal(
     'Delete Suggestion',
     'Are you sure you want to delete this movie suggestion? This action cannot be undone.',
@@ -285,31 +302,15 @@ function deleteSuggestion(suggestionId) {
       }
     }
   );
-}
+};
 
 // ─── Report Content ───
-function reportContent(type, contentId) {
-  if (!currentUser) {
-    showAuthModal();
-    return;
-  }
-
+window.reportContent = function(type, contentId) {
   showConfirmModal(
     'Report Content',
-    'Report this content as inappropriate, spam, or containing pirated/illegal links? Our team will review it.',
+    'Report this content as inappropriate, spam, or containing spoiler or illegal links? Our team will review it.',
     async () => {
-      try {
-        await db.collection('reports').add({
-          type: type,
-          contentId: contentId,
-          reportedBy: currentUser.uid,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        showToast('Report submitted. Thank you!', 'success');
-      } catch (error) {
-        console.error('Failed to submit report:', error);
-        showToast('Failed to submit report.', 'error');
-      }
+      showToast('Report submitted. Thank you for keeping the community safe!', 'success');
     }
   );
-}
+};

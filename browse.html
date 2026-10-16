@@ -61,6 +61,10 @@
 
       <!-- Filter Bar -->
       <div class="filter-bar fade-in" id="filterBar">
+        <div class="filter-group" style="flex: 1.5; min-width: 200px;">
+          <label class="filter-label" for="searchRequests">Search Requests</label>
+          <input type="text" id="searchRequests" class="form-input" placeholder="Search keywords, movies, or vibes...">
+        </div>
         <div class="filter-group">
           <label class="filter-label" for="filterGenre">Genre</label>
           <select id="filterGenre" class="form-select">
@@ -114,15 +118,15 @@
 
     <footer class="footer">
       <p>MovieSuggest — People helping people choose movies.</p>
+      <p style="margin-top:8px;font-size:0.8rem;opacity:0.5;">
+        <a href="movies.html" style="color:inherit;">🎬 Explore 200+ Top Movies</a> &nbsp;·&nbsp;
+        <a href="index.html" style="color:inherit;">Home</a> &nbsp;·&nbsp;
+        <a href="ask.html" style="color:inherit;">Ask a Question</a>
+      </p>
     </footer>
   </main>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
-  <script src="js/firebase-config.js"></script>
+  <!-- Static Store & Scripts -->
   <script src="js/auth.js"></script>
   <script src="js/analytics.js"></script>
   <script src="js/browse.js"></script>

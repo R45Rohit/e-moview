@@ -1,22 +1,36 @@
 // ============================================================
 // Browse Page Logic
-// Loads community requests with filtering and pagination
+// Loads community requests with filtering, live search, and pagination
+// 100% Static & Client-Side
 // ============================================================
 
-/* global onAuthReady, injectNav, db, escapeHTML, timeAgo, showSkeletonGrid, trackBrowseUsed */
+/* global onAuthReady, injectNav, db, escapeHTML, timeAgo, showSkeletonGrid, trackBrowseUsed, getUrlParam */
 
 const PAGE_SIZE = 9;
 let lastDoc = null;
 let isLoading = false;
-let currentFilters = { genre: '', language: '', mood: '' };
+let currentFilters = { genre: '', language: '', mood: '', query: '' };
 
 document.addEventListener('DOMContentLoaded', () => {
   const requestsGrid = document.getElementById('requestsGrid');
   const filterGenre = document.getElementById('filterGenre');
   const filterLanguage = document.getElementById('filterLanguage');
   const filterMood = document.getElementById('filterMood');
+  const searchRequests = document.getElementById('searchRequests');
   const loadMoreBtn = document.getElementById('loadMoreBtn');
   const loadMoreContainer = document.getElementById('loadMoreContainer');
+
+  // Check URL query param (e.g. ?q=sci-fi or ?genre=Action)
+  const urlQ = getUrlParam('q') || '';
+  const urlGenre = getUrlParam('genre') || '';
+  if (urlQ && searchRequests) {
+    searchRequests.value = urlQ;
+    currentFilters.query = urlQ.toLowerCase();
+  }
+  if (urlGenre && filterGenre) {
+    filterGenre.value = urlGenre;
+    currentFilters.genre = urlGenre;
+  }
 
   // Show skeleton loading
   showSkeletonGrid(requestsGrid, PAGE_SIZE);
@@ -28,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Filter change handlers
   [filterGenre, filterLanguage, filterMood].forEach(filter => {
+    if (!filter) return;
     filter.addEventListener('change', () => {
       currentFilters.genre = filterGenre.value;
       currentFilters.language = filterLanguage.value;
@@ -39,10 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Live search handler
+  if (searchRequests) {
+    searchRequests.addEventListener('input', () => {
+      currentFilters.query = searchRequests.value.trim().toLowerCase();
+      lastDoc = null;
+      loadRequests(true);
+    });
+  }
+
   // Load more
-  loadMoreBtn.addEventListener('click', () => {
-    loadRequests(false);
-  });
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      loadRequests(false);
+    });
+  }
 });
 
 async function loadRequests(reset) {
@@ -56,7 +82,7 @@ async function loadRequests(reset) {
   if (reset) {
     showSkeletonGrid(requestsGrid, PAGE_SIZE);
     lastDoc = null;
-  } else {
+  } else if (loadMoreBtn) {
     loadMoreBtn.disabled = true;
     loadMoreBtn.textContent = 'Loading...';
   }
@@ -75,39 +101,50 @@ async function loadRequests(reset) {
       query = query.where('mood', '==', currentFilters.mood);
     }
 
-    query = query.orderBy('createdAt', 'desc').limit(PAGE_SIZE);
-
-    if (lastDoc) {
-      query = query.startAfter(lastDoc);
-    }
+    query = query.orderBy('createdAt', 'desc');
 
     const snapshot = await query.get();
+    let docs = snapshot.docs;
 
-    if (snapshot.empty && reset) {
+    // Filter by text search if provided
+    if (currentFilters.query) {
+      const q = currentFilters.query;
+      docs = docs.filter(doc => {
+        const d = doc.data();
+        const text = `${d.description || ''} ${d.userName || ''} ${d.genre || ''} ${d.language || ''} ${d.mood || ''}`.toLowerCase();
+        return text.includes(q);
+      });
+    }
+
+    if (docs.length === 0 && reset) {
       requestsGrid.innerHTML = `
         <div class="empty-state" style="grid-column: 1 / -1;">
           <div class="empty-state-icon">🔍</div>
           <h3 class="empty-state-title">No requests found</h3>
-          <p class="empty-state-text">Try adjusting your filters, or be the first to ask for a recommendation!</p>
+          <p class="empty-state-text">Try adjusting your filters or search terms, or be the first to ask for a recommendation!</p>
           <a href="ask.html" class="btn btn-primary mt-md">Ask for a Recommendation</a>
         </div>
       `;
-      loadMoreContainer.style.display = 'none';
+      if (loadMoreContainer) loadMoreContainer.style.display = 'none';
       isLoading = false;
       return;
     }
 
-    if (snapshot.empty && !reset) {
-      loadMoreContainer.style.display = 'none';
+    // Pagination slice
+    const startIndex = reset ? 0 : (lastDoc ? docs.findIndex(d => d.id === lastDoc.id) + 1 : 0);
+    const pageDocs = docs.slice(startIndex, startIndex + PAGE_SIZE);
+
+    if (pageDocs.length === 0 && !reset) {
+      if (loadMoreContainer) loadMoreContainer.style.display = 'none';
       isLoading = false;
       return;
     }
 
     // Track last document for pagination
-    lastDoc = snapshot.docs[snapshot.docs.length - 1];
+    lastDoc = pageDocs[pageDocs.length - 1];
 
     // Fetch suggestion counts
-    const requestIds = snapshot.docs.map(d => d.id);
+    const requestIds = pageDocs.map(d => d.id);
     const suggestionCounts = {};
     const countPromises = requestIds.map(async (id) => {
       const sugSnap = await db.collection('suggestions')
@@ -119,7 +156,7 @@ async function loadRequests(reset) {
 
     // Render cards
     let html = '';
-    snapshot.docs.forEach((doc, index) => {
+    pageDocs.forEach((doc, index) => {
       const data = doc.data();
       const count = suggestionCounts[doc.id] || 0;
       html += renderBrowseCard(doc.id, data, count, index);
@@ -132,9 +169,14 @@ async function loadRequests(reset) {
     }
 
     // Show/hide load more
-    loadMoreContainer.style.display = snapshot.docs.length < PAGE_SIZE ? 'none' : '';
-    loadMoreBtn.disabled = false;
-    loadMoreBtn.textContent = 'Load More Requests';
+    const hasMore = startIndex + PAGE_SIZE < docs.length;
+    if (loadMoreContainer) {
+      loadMoreContainer.style.display = hasMore ? '' : 'none';
+    }
+    if (loadMoreBtn) {
+      loadMoreBtn.disabled = false;
+      loadMoreBtn.textContent = 'Load More Requests';
+    }
 
   } catch (error) {
     console.error('Failed to load requests:', error);
@@ -143,7 +185,7 @@ async function loadRequests(reset) {
         <div class="empty-state" style="grid-column: 1 / -1;">
           <div class="empty-state-icon">⚠️</div>
           <h3 class="empty-state-title">Something went wrong</h3>
-          <p class="empty-state-text">Please check your connection and refresh the page.</p>
+          <p class="empty-state-text">Please refresh the page to view requests.</p>
         </div>
       `;
     }
