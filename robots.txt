@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+Allow: /movies.html
+Allow: /browse.html
+Allow: /ask.html
+Allow: /request.html
 Disallow: /auth.html
+Disallow: /activity.html
+Disallow: /profile.html
 
 Sitemap: https://e-moview.onrender.com/sitemap.xml
