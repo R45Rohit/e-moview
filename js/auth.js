@@ -750,9 +750,9 @@
     return `
       <nav class="nav" role="navigation" aria-label="Main navigation">
         <div class="nav-inner">
-          <a href="index.html" class="nav-brand" aria-label="MovieSuggest Home">
+          <a href="index.html" class="nav-brand" aria-label="Moview Home">
             <span class="nav-brand-icon">🎬</span>
-            <span>MovieSuggest</span>
+            <span>Moview</span>
           </a>
           <div class="nav-links" id="navLinks">
             <a href="index.html" class="nav-link ${activePage === 'home' ? 'active' : ''}">Home</a>
@@ -822,7 +822,7 @@
     overlay.className = 'modal-overlay';
     overlay.innerHTML = `
       <div class="modal">
-        <h2 class="modal-title">Join MovieSuggest</h2>
+        <h2 class="modal-title">Join Moview</h2>
         <p class="modal-text">Create an account or continue as a guest to post requests and share movie recommendations.</p>
         <div class="modal-actions">
           <a href="auth.html?mode=register&redirect=${encodeURIComponent(window.location.href)}" class="btn btn-primary">Create Account</a>

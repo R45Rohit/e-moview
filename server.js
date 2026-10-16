@@ -34,5 +34,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`MovieSuggest running on http://localhost:${PORT}`);
+  console.log(`Moview running on http://localhost:${PORT}`);
 });

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login or Register — MovieSuggest</title>
-  <meta name="description" content="Create an account or login to ask for movie recommendations and suggest movies to others.">
+  <title>Login or Join — Moview</title>
+  <meta name="description" content="Create an account or login to Moview (e-moview) to ask for movie recommendations and suggest films to others.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#07070d">
   <link rel="stylesheet" href="css/style.css">
@@ -16,7 +16,7 @@
     <div class="container container-narrow">
       <div class="auth-container fade-in">
         <div class="auth-header">
-          <h1 id="authTitle">Welcome to MovieSuggest</h1>
+          <h1 id="authTitle">Welcome to Moview</h1>
           <p id="authSubtitle">Create an account to start sharing and getting movie recommendations.</p>
         </div>
 
@@ -78,7 +78,7 @@
     </div>
 
     <footer class="footer">
-      <p>MovieSuggest — People helping people choose movies.</p>
+      <p><strong>Moview</strong> (e-moview) — People helping people choose movies.</p>
       <p style="margin-top:8px;font-size:0.8rem;opacity:0.5;">
         <a href="movies.html" style="color:inherit;">🎬 Explore 200+ Top Movies</a> &nbsp;·&nbsp;
         <a href="index.html" style="color:inherit;">Home</a> &nbsp;·&nbsp;
@@ -124,7 +124,7 @@
           registerForm.classList.remove('hidden');
           authTitle.textContent = currentUser && currentUser.isAnonymous
             ? 'Upgrade Your Account'
-            : 'Welcome to MovieSuggest';
+            : 'Welcome to Moview';
           authSubtitle.textContent = currentUser && currentUser.isAnonymous
             ? 'Convert your guest account to a permanent registered account.'
             : 'Create an account to start sharing and getting movie recommendations.';

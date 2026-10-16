@@ -169,7 +169,7 @@ async function loadRequest() {
     `;
 
     // Update page title
-    document.title = `${data.description ? data.description.substring(0, 50) : 'Request'} — MovieSuggest`;
+    document.title = `${data.description ? data.description.substring(0, 50) : 'Request'} — Moview`;
 
     // Show suggestions section
     document.getElementById('suggestionsSection').style.display = '';
