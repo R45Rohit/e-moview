@@ -21,6 +21,13 @@
   <meta name="theme-color" content="#07070d">
   <link rel="canonical" href="https://e-moview.onrender.com/movies">
 
+  <!-- Internationalization and GEO Targeting -->
+  <meta http-equiv="content-language" content="en-US">
+  <meta name="geo.region" content="US">
+  <meta name="geo.placename" content="United States">
+  <link rel="alternate" hreflang="en" href="https://e-moview.onrender.com/movies">
+  <link rel="alternate" hreflang="x-default" href="https://e-moview.onrender.com/movies">
+
   <!-- Favicons and Web App Manifest -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -43,6 +50,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Top 200 Movies Catalog - Moview">
+  <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -58,6 +66,7 @@
     "@type": "CollectionPage",
     "name": "Top 200+ Movies of All Time — Curated IMDb Film List",
     "url": "https://e-moview.onrender.com/movies",
+    "inLanguage": "en-US",
     "description": "Browse 200+ must-watch movies curated by the Moview community with IMDb ratings, genres, and languages.",
     "breadcrumb": {
       "@type": "BreadcrumbList",
@@ -177,20 +186,24 @@
     .filter-pill-group { display: flex; gap: 8px; flex-wrap: wrap; }
     .filter-pill {
       background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: 999px;
-      padding: 6px 14px;
-      color: rgba(255,255,255,0.7);
-      font-size: 0.82rem;
+      padding: 8px 16px;
+      min-height: 40px;
+      color: #f5f5fa;
+      font-size: 0.86rem;
       cursor: pointer;
       transition: all 0.2s;
       font-weight: 500;
       font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
     .filter-pill:hover, .filter-pill.active {
-      background: rgba(167,139,250,0.2);
+      background: rgba(167,139,250,0.25);
       border-color: #a78bfa;
-      color: #a78bfa;
+      color: #fff;
     }
     .movies-container {
       max-width: 1200px;
@@ -295,35 +308,69 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 8px;
       margin-top: 14px;
       padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
     }
     .btn-watchlist {
       background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.16);
       border-radius: 999px;
-      padding: 4px 12px;
-      font-size: 0.76rem;
-      color: rgba(255,255,255,0.8);
+      padding: 6px 14px;
+      min-height: 38px;
+      font-size: 0.8rem;
+      color: #f5f5fa;
       cursor: pointer;
       transition: all 0.2s;
       font-weight: 600;
       font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
     .btn-watchlist:hover, .btn-watchlist.saved {
-      background: rgba(251, 191, 36, 0.15);
+      background: rgba(251, 191, 36, 0.18);
       border-color: #fbbf24;
       color: #fbbf24;
     }
+    .movie-card-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-imdb-link {
+      background: rgba(245, 197, 24, 0.12);
+      border: 1px solid rgba(245, 197, 24, 0.35);
+      color: #f5c518;
+      border-radius: 999px;
+      padding: 6px 12px;
+      min-height: 38px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn-imdb-link:hover {
+      background: rgba(245, 197, 24, 0.25);
+      border-color: #f5c518;
+      color: #fff;
+    }
     .btn-suggest-link {
-      font-size: 0.76rem;
+      font-size: 0.82rem;
       color: #a78bfa;
       text-decoration: none;
       transition: opacity 0.2s;
-      font-weight: 500;
+      font-weight: 600;
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
     }
-    .btn-suggest-link:hover { opacity: 0.8; text-decoration: underline; }
+    .btn-suggest-link:hover { opacity: 0.85; text-decoration: underline; }
     .movies-cta {
       background: linear-gradient(135deg, rgba(167,139,250,0.1), rgba(244,114,182,0.1));
       border: 1px solid rgba(167,139,250,0.2);
@@ -448,14 +495,72 @@
       </section>
     </div>
 
-    <footer class="footer">
-      <p><strong>Moview</strong> (e-moview) — People helping people choose movies.</p>
-      <p style="margin-top:8px;font-size:0.85rem;opacity:0.7;">
-        <a href="/" style="color:inherit;">Home</a> &nbsp;·&nbsp;
-        <a href="/browse" style="color:inherit;">Browse Requests</a> &nbsp;·&nbsp;
-        <a href="/ask" style="color:inherit;">Ask a Question</a> &nbsp;·&nbsp;
-        <a href="/profile" style="color:inherit;">Watchlist</a>
-      </p>
+    <footer class="footer" role="contentinfo">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <!-- Col 1: Brand & Authority Outbound Links -->
+          <div class="footer-col">
+            <div class="footer-brand">
+              <span class="brand-icon" aria-hidden="true">🎬</span>
+              <span>Moview</span>
+            </div>
+            <p class="footer-tagline">
+              The movie recommendation platform powered by real film lovers. Get genuine suggestions for what to watch tonight across all languages and platforms.
+            </p>
+            <div class="footer-social-links">
+              <a href="https://www.imdb.com/chart/top/" target="_blank" rel="noopener noreferrer" class="footer-ext-link" title="Explore IMDb Top 250 Movies Chart">
+                <span>⭐ IMDb Top 250</span>
+              </a>
+              <a href="https://github.com/R45Rohit/e-moview" target="_blank" rel="noopener noreferrer" class="footer-ext-link" title="View Moview Open Source Project on GitHub">
+                <span>💻 GitHub</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2: Movie Discovery -->
+          <div class="footer-col">
+            <h3 class="footer-heading">Discover Films</h3>
+            <ul class="footer-nav-list">
+              <li><a href="/movies" title="Explore Top 200 Movies Catalog">Top 200 Movies</a></li>
+              <li><a href="/browse?genre=Action" title="Browse Action Movie Recommendations">Action Movies</a></li>
+              <li><a href="/browse?genre=Sci-Fi" title="Browse Sci-Fi Movie Recommendations">Sci-Fi Films</a></li>
+              <li><a href="/browse?genre=Horror" title="Browse Horror &amp; Thriller Recommendations">Horror &amp; Thrillers</a></li>
+              <li><a href="/browse?genre=Drama" title="Browse Drama Movie Recommendations">Gripping Dramas</a></li>
+              <li><a href="/browse?genre=Comedy" title="Browse Comedy Movie Recommendations">Feel-Good Comedies</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Languages & World Cinema -->
+          <div class="footer-col">
+            <h3 class="footer-heading">World Cinema</h3>
+            <ul class="footer-nav-list">
+              <li><a href="/browse?language=English" title="Hollywood Movie Recommendations">Hollywood (English)</a></li>
+              <li><a href="/browse?language=Hindi" title="Bollywood Movie Recommendations">Bollywood (Hindi)</a></li>
+              <li><a href="/browse?language=Korean" title="Korean Drama &amp; Film Recommendations">Korean Cinema (K-Dramas)</a></li>
+              <li><a href="/browse?language=Tamil" title="Tamil Kollywood Movie Recommendations">Tamil Cinema</a></li>
+              <li><a href="/browse?language=Telugu" title="Telugu Tollywood Movie Recommendations">Telugu Cinema</a></li>
+              <li><a href="/browse?language=Japanese" title="Japanese Cinema &amp; Anime Recommendations">Anime &amp; Japanese</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Community & Quick Links -->
+          <div class="footer-col">
+            <h3 class="footer-heading">Community</h3>
+            <ul class="footer-nav-list">
+              <li><a href="/ask" title="Ask the Community for Movie Recommendations">Ask For Movie Picks</a></li>
+              <li><a href="/browse" title="Browse All Active Movie Requests">Browse Community Requests</a></li>
+              <li><a href="/profile" title="View Your Personal Movie Watchlist">My Watchlist</a></li>
+              <li><a href="/" title="Moview Home Page">Moview Home</a></li>
+              <li><a href="https://developers.themoviedb.org/" target="_blank" rel="noopener noreferrer" title="TMDB Movie API Documentation">Powered by TMDB / IMDb Data</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Copyright & Legal -->
+        <div class="footer-bottom">
+          <p>&copy; 2026 <strong>Moview</strong> (e-moview). All rights reserved. Free, open-source community movie recommendations. Made with passion for cinema worldwide.</p>
+        </div>
+      </div>
     </footer>
   </main>
 
@@ -737,10 +842,13 @@
           <span class="movie-tag tag-lang">🌐 ${m.lang}</span>
         </div>
         <div class="movie-card-footer">
-          <button class="btn-watchlist ${isSaved ? 'saved' : ''}" onclick="toggleMovieWatchlist('${escapedTitle}', this)" aria-label="Save to Watchlist">
+          <button class="btn-watchlist ${isSaved ? 'saved' : ''}" onclick="toggleMovieWatchlist('${escapedTitle}', this)" aria-label="Save ${escapedTitle} to Watchlist">
             ${isSaved ? '★ In Watchlist' : '☆ Watchlist'}
           </button>
-          <a href="/browse?q=${encodeURIComponent(m.title)}" class="btn-suggest-link">Find Requests →</a>
+          <div class="movie-card-links">
+            <a href="https://www.imdb.com/find/?q=${encodeURIComponent(m.title)}" target="_blank" rel="noopener noreferrer" class="btn-imdb-link" title="Look up ${escapedTitle} on IMDb (External Link)">IMDb ↗</a>
+            <a href="/browse?q=${encodeURIComponent(m.title)}" class="btn-suggest-link" title="Browse community movie requests for ${escapedTitle}">Requests →</a>
+          </div>
         </div>
       </div>
     </article>`;

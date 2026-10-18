@@ -748,35 +748,37 @@
     const isRegistered = isLoggedIn && !currentUser.isAnonymous;
 
     return `
-      <nav class="nav" role="navigation" aria-label="Main navigation">
-        <div class="nav-inner">
-          <a href="/" class="nav-brand" aria-label="Moview Home">
-            <span class="nav-brand-icon">🎬</span>
-            <span>Moview</span>
-          </a>
-          <div class="nav-links" id="navLinks">
-            <a href="/" class="nav-link ${activePage === 'home' ? 'active' : ''}">Home</a>
-            <a href="/movies" class="nav-link ${activePage === 'movies' ? 'active' : ''}">🍿 Top Movies</a>
-            <a href="/browse" class="nav-link ${activePage === 'browse' ? 'active' : ''}">🔍 Browse</a>
-            <a href="/ask" class="nav-link ${activePage === 'ask' ? 'active' : ''}">💬 Ask</a>
-            <a href="/activity" class="nav-link ${activePage === 'activity' ? 'active' : ''}">📋 My Activity</a>
-            <a href="/profile" class="nav-link ${activePage === 'profile' ? 'active' : ''}">👤 Profile</a>
+      <header class="site-header" role="banner">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+          <div class="nav-inner">
+            <a href="/" class="nav-brand" aria-label="Moview Home" title="Moview Homepage — Real Movie Recommendations">
+              <span class="nav-brand-icon" aria-hidden="true">🎬</span>
+              <span>Moview</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+              <a href="/" class="nav-link ${activePage === 'home' ? 'active' : ''}" title="Moview Home — Discover what to watch tonight">Home</a>
+              <a href="/movies" class="nav-link ${activePage === 'movies' ? 'active' : ''}" title="Top 200+ IMDb Rated Movies of All Time">🍿 Top Movies</a>
+              <a href="/browse" class="nav-link ${activePage === 'browse' ? 'active' : ''}" title="Browse Community Movie Recommendation Requests">🔍 Browse</a>
+              <a href="/ask" class="nav-link ${activePage === 'ask' ? 'active' : ''}" title="Ask the Community for Personalized Movie Suggestions">💬 Ask</a>
+              <a href="/activity" class="nav-link ${activePage === 'activity' ? 'active' : ''}" title="View and Manage Your Movie Requests & Suggestions">📋 My Activity</a>
+              <a href="/profile" class="nav-link ${activePage === 'profile' ? 'active' : ''}" title="View Your Profile & Saved Film Watchlist">👤 Profile</a>
+            </div>
+            <div class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" role="button" tabindex="0">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
-          <div class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" role="button" tabindex="0">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+        </nav>
+        <div class="nav-mobile" id="navMobile">
+          <a href="/" class="nav-link ${activePage === 'home' ? 'active' : ''}" title="Moview Homepage">🏠 Home</a>
+          <a href="/movies" class="nav-link ${activePage === 'movies' ? 'active' : ''}" title="Top 200 Movies Catalog">🍿 Top 200+ Movies</a>
+          <a href="/browse" class="nav-link ${activePage === 'browse' ? 'active' : ''}" title="Browse Community Requests">🔍 Browse Requests</a>
+          <a href="/ask" class="nav-link ${activePage === 'ask' ? 'active' : ''}" title="Ask for a Film Recommendation">💬 Ask Community</a>
+          <a href="/activity" class="nav-link ${activePage === 'activity' ? 'active' : ''}" title="Manage Your Activity">📋 My Activity</a>
+          <a href="/profile" class="nav-link ${activePage === 'profile' ? 'active' : ''}" title="Your Saved Film Watchlist">👤 Profile</a>
         </div>
-      </nav>
-      <div class="nav-mobile" id="navMobile">
-        <a href="/" class="nav-link ${activePage === 'home' ? 'active' : ''}">🏠 Home</a>
-        <a href="/movies" class="nav-link ${activePage === 'movies' ? 'active' : ''}">🍿 Top 200+ Movies</a>
-        <a href="/browse" class="nav-link ${activePage === 'browse' ? 'active' : ''}">🔍 Browse Requests</a>
-        <a href="/ask" class="nav-link ${activePage === 'ask' ? 'active' : ''}">💬 Ask Community</a>
-        <a href="/activity" class="nav-link ${activePage === 'activity' ? 'active' : ''}">📋 My Activity</a>
-        <a href="/profile" class="nav-link ${activePage === 'profile' ? 'active' : ''}">👤 Profile</a>
-      </div>
+      </header>
     `;
   }
 

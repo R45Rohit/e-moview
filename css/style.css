@@ -16,10 +16,10 @@
   --bg-nav: rgba(10, 10, 18, 0.85);
   --bg-modal: rgba(0, 0, 0, 0.7);
 
-  /* Text */
-  --text-primary: #f0f0f5;
-  --text-secondary: #8a8a9e;
-  --text-muted: #55556a;
+  /* Text - High Contrast WCAG AAA */
+  --text-primary: #f5f5fa;
+  --text-secondary: #b8b8d0;
+  --text-muted: #8e8ea8;
   --text-inverse: #07070d;
 
   /* Accent */
@@ -405,21 +405,28 @@ input, textarea, select {
   position: relative;
 }
 
-/* ─── Buttons ─── */
+/* ─── Buttons (Touch-Optimized for Mobile Usability) ─── */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
   padding: 12px 24px;
+  min-height: 44px;
   border-radius: var(--radius-sm);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   transition: all var(--transition-base);
   text-decoration: none;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  min-height: 40px;
+  font-size: 0.88rem;
 }
 
 .btn-primary {
@@ -1460,10 +1467,14 @@ input, textarea, select {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
-  padding: 6px 14px;
-  font-size: 0.8rem;
+  padding: 8px 18px;
+  min-height: 42px;
+  font-size: 0.88rem;
   color: var(--text-secondary);
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s ease;
 }
 
@@ -1473,3 +1484,159 @@ input, textarea, select {
   color: #fff;
   text-decoration: none;
 }
+
+/* ─── Global Focus States (Accessibility & Usability) ─── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 3px;
+}
+
+/* ─── Touch Target Minimums (Lighthouse & Mobile Usability) ─── */
+.nav-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ─── Comprehensive SEO Link Footer ─── */
+.footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  padding: var(--space-3xl) 0 var(--space-xl);
+  margin-top: var(--space-3xl);
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.footer-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 540px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--space-sm);
+}
+
+.footer-tagline {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.9rem;
+  margin-bottom: var(--space-md);
+  max-width: 320px;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-ext-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  min-height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.footer-ext-link:hover {
+  background: rgba(168, 125, 255, 0.15);
+  border-color: var(--accent-secondary);
+  color: #fff;
+}
+
+.footer-heading {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.footer-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav-list a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  transition: color 0.2s ease;
+}
+
+.footer-nav-list a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ─── Ad Placements ─── */
+.ad-banner-wrapper,
+.ad-native-container,
+.ad-skyscraper-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.ad-banner-wrapper iframe,
+.ad-skyscraper-wrapper iframe {
+  max-width: 100%;
+}
+
