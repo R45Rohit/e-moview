@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e50914" />
+      <stop offset="50%" stop-color="#a87dff" />
+      <stop offset="100%" stop-color="#f472b6" />
+    </linearGradient>
+    <linearGradient id="grad-slate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a28" />
+      <stop offset="100%" stop-color="#0d0d15" />
+    </linearGradient>
+  </defs>
+  <!-- Background rounded squircle -->
+  <rect x="4" y="4" width="92" height="92" rx="22" fill="#07070d" stroke="#2e2e45" stroke-width="4"/>
+  
+  <!-- Film Slate Clapper Top -->
+  <rect x="18" y="22" width="64" height="14" rx="4" fill="url(#grad-accent)" />
+  <polygon points="26,22 33,22 28,36 21,36" fill="#ffffff" opacity="0.85" />
+  <polygon points="42,22 49,22 44,36 37,36" fill="#ffffff" opacity="0.85" />
+  <polygon points="58,22 65,22 60,36 53,36" fill="#ffffff" opacity="0.85" />
+  <polygon points="74,22 81,22 76,36 69,36" fill="#ffffff" opacity="0.85" />
+
+  <!-- Slate Body / Screen -->
+  <rect x="18" y="39" width="64" height="39" rx="8" fill="url(#grad-slate)" stroke="#a87dff" stroke-width="2.5" />
+
+  <!-- Play Glyph -->
+  <polygon points="45,48 61,58.5 45,69" fill="#f472b6" />
+</svg>

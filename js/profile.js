@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <h3 class="empty-state-title">Not Logged In</h3>
           <p class="empty-state-text">Login, create an account, or continue as guest to view your profile and saved watchlist.</p>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-            <a href="auth.html?mode=register" class="btn btn-primary">Create Account</a>
-            <a href="auth.html?mode=login" class="btn btn-secondary">Login</a>
+            <a href="/auth?mode=register" class="btn btn-primary">Create Account</a>
+            <a href="/auth?mode=login" class="btn btn-secondary">Login</a>
             <button class="btn btn-ghost" id="quickGuestProfileBtn">👤 Continue as Guest</button>
           </div>
         </div>
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="auth-card mb-md" style="margin-bottom: 24px;">
           <div class="flex-between" style="margin-bottom: 16px;">
             <h3 style="font-family:var(--font-heading);font-size:1.15rem;margin:0;">⭐ My Saved Watchlist (${watchlist.length})</h3>
-            <a href="movies.html" class="btn btn-ghost btn-sm">Explore Movies →</a>
+            <a href="/movies" class="btn btn-ghost btn-sm">Explore Movies →</a>
           </div>
 
           <div id="watchlistContainer">
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             ` : `
               <p class="text-secondary" style="font-size:0.9rem;padding:12px 0;">
-                Your watchlist is currently empty. Visit the <a href="movies.html" style="color:var(--accent-secondary);">Top 200+ Movies</a> page and click ⭐ to save films to your watchlist!
+                Your watchlist is currently empty. Visit the <a href="/movies" style="color:var(--accent-secondary);">Top 200+ Movies</a> page and click ⭐ to save films to your watchlist!
               </p>
             `}
           </div>
@@ -135,13 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
               Create an account with email and password so you can access your profile and recommendations anytime.
             </p>
             <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-              <a href="auth.html?mode=register" class="btn btn-primary">Create Account</a>
+              <a href="/auth?mode=register" class="btn btn-primary">Create Account</a>
               <button class="btn btn-secondary" id="logoutBtn">Sign Out</button>
             </div>
           ` : `
             <h3 style="font-family:var(--font-heading);margin-bottom:8px;">Account Settings</h3>
             <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;">
-              <a href="activity.html" class="btn btn-secondary">View My Activity</a>
+              <a href="/activity" class="btn btn-secondary">View My Activity</a>
               <button class="btn btn-danger" id="logoutBtn">Sign Out</button>
             </div>
           `}

@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Redirect to the new request page
       setTimeout(() => {
-        window.location.href = `request.html?id=${docRef.id}`;
+        window.location.href = `/request?id=${docRef.id}`;
       }, 500);
     } catch (error) {
       console.error('Failed to post request:', error);

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="empty-state-icon">❌</div>
         <h3 class="empty-state-title">Request Not Found</h3>
         <p class="empty-state-text">This request doesn't exist or the link is invalid.</p>
-        <a href="browse.html" class="btn btn-primary">Browse Requests</a>
+        <a href="/browse" class="btn btn-primary">Browse Requests</a>
       </div>
     `;
     return;
@@ -143,7 +143,7 @@ async function loadRequest() {
           <div class="empty-state-icon">❌</div>
           <h3 class="empty-state-title">Request Not Found</h3>
           <p class="empty-state-text">This request may have been deleted or the ID is invalid.</p>
-          <a href="browse.html" class="btn btn-primary">Browse Requests</a>
+          <a href="/browse" class="btn btn-primary">Browse Requests</a>
         </div>
       `;
       return;
@@ -162,14 +162,18 @@ async function loadRequest() {
           <span class="tag tag-language">🌐 ${escapeHTML(data.language || 'Any')}</span>
           <span class="tag tag-mood">✨ ${escapeHTML(data.mood || 'Any')}</span>
         </div>
-        <div class="card-description full" style="-webkit-line-clamp:unset;">
-          "${escapeHTML(data.description || '')}"
-        </div>
+        <h1 class="request-title" style="font-size: 1.35rem; font-weight: 700; line-height: 1.45; margin-bottom: 16px; color: var(--text-primary); font-family: Outfit, Inter, sans-serif;">
+          "${escapeHTML(data.description || 'Movie Recommendation Request')}"
+        </h1>
       </div>
     `;
 
-    // Update page title
-    document.title = `${data.description ? data.description.substring(0, 50) : 'Request'} — Moview`;
+    // Update page title and canonical URL for specific request
+    document.title = `${data.description ? data.description.substring(0, 45) : 'Movie Request'} — Moview`;
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.href = `https://e-moview.onrender.com/request?id=${encodeURIComponent(requestId)}`;
+    }
 
     // Show suggestions section
     document.getElementById('suggestionsSection').style.display = '';
@@ -180,7 +184,7 @@ async function loadRequest() {
         <div class="empty-state-icon">⚠️</div>
         <h3 class="empty-state-title">Error Loading Request</h3>
         <p class="empty-state-text">Please refresh the page to view this request.</p>
-        <a href="browse.html" class="btn btn-primary">Browse Requests</a>
+        <a href="/browse" class="btn btn-primary">Browse Requests</a>
       </div>
     `;
   }

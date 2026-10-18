@@ -70,7 +70,7 @@ async function loadMyRequests() {
           <div class="empty-state-icon">📝</div>
           <h3 class="empty-state-title">No requests yet</h3>
           <p class="empty-state-text">You haven't asked for any movie recommendations yet.</p>
-          <a href="ask.html" class="btn btn-primary">Ask for a Recommendation</a>
+          <a href="/ask" class="btn btn-primary">Ask for a Recommendation</a>
         </div>
       `;
       return;
@@ -108,7 +108,7 @@ function renderMyRequestCard(id, data) {
       </div>
       <p class="card-description full">"${escapeHTML(data.description)}"</p>
       <div class="card-footer">
-        <a href="request.html?id=${id}" class="btn btn-secondary btn-sm">View Suggestions →</a>
+        <a href="/request?id=${id}" class="btn btn-secondary btn-sm">View Suggestions →</a>
       </div>
     </div>
   `;
@@ -222,7 +222,7 @@ async function loadMySuggestions() {
           <div class="empty-state-icon">🍿</div>
           <h3 class="empty-state-title">No suggestions yet</h3>
           <p class="empty-state-text">You haven't suggested any movies yet. Browse requests to help others!</p>
-          <a href="browse.html" class="btn btn-primary">Browse Requests</a>
+          <a href="/browse" class="btn btn-primary">Browse Requests</a>
         </div>
       `;
       return;
@@ -240,7 +240,7 @@ async function loadMySuggestions() {
               <button class="btn btn-danger btn-sm" onclick="deleteMySuggestion('${doc.id}')">🗑️ Delete</button>
             </div>
           </div>
-          <p class="suggestion-by">${timeAgo(data.createdAt)} · <a href="request.html?id=${data.requestId}" style="color:var(--accent-secondary);">View Request →</a></p>
+          <p class="suggestion-by">${timeAgo(data.createdAt)} · <a href="/request?id=${data.requestId}" style="color:var(--accent-secondary);">View Request →</a></p>
           <div class="suggestion-reason">"${escapeHTML(data.reason)}"</div>
         </div>
       `;

@@ -4,46 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="googleb51d43dc9d8d4e68.html">
+  <meta name="google-site-verification" content="b51d43dc9d8d4e68">
+
   <!-- Google AdSense -->
   <meta name="google-adsense-account" content="ca-pub-5380321368048106">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5380321368048106" crossorigin="anonymous"></script>
 
   <!-- Primary SEO -->
-  <title>Browse Movie Recommendation Requests — Moview</title>
-  <meta name="description" content="Browse hundreds of community movie recommendation requests on Moview (e-moview). Filter by genre (Action, Comedy, Horror, Sci-Fi, Romance, Drama, Thriller), language (English, Hindi, Tamil, Telugu, Korean), and mood. Discover what real movie lovers recommend.">
-  <meta name="keywords" content="moview, e-moview, browse movie requests, community movie recommendations, movie suggestions by genre, movie suggestions by language, best movies by mood, find a movie to watch, what to watch tonight, film recommendations, movie picks community, top movie recommendations, hollywood suggestions, bollywood suggestions, korean drama suggestions, south indian movie recommendations, best movies to watch tonight, film discussion">
+  <title>Browse Movie Requests &amp; Recommendations | Moview</title>
+  <meta name="description" content="Explore community movie requests on Moview. Filter by genre, language, and mood to discover personalized film picks or recommend your favorite movies.">
+  <meta name="keywords" content="moview, e-moview, browse movie requests, community movie recommendations, movie suggestions by genre, film recommendations, movie picks community">
   <meta name="author" content="Moview">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#07070d">
-  <link rel="canonical" href="https://e-moview.onrender.com/browse.html">
+  <link rel="canonical" href="https://e-moview.onrender.com/browse">
+
+  <!-- Favicons and Web App Manifest -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Preconnect and Load Google Fonts (High-Performance Core Web Vitals) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moview">
-  <meta property="og:title" content="Browse Movie Recommendation Requests — Moview">
+  <meta property="og:title" content="Browse Movie Requests &amp; Recommendations | Moview">
   <meta property="og:description" content="See what movies the Moview community is looking for and help suggest the perfect film. Filter by genre, language, and mood.">
-  <meta property="og:url" content="https://e-moview.onrender.com/browse.html">
+  <meta property="og:url" content="https://e-moview.onrender.com/browse">
   <meta property="og:image" content="https://e-moview.onrender.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Browse Community Movie Requests on Moview">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Browse Movie Recommendation Requests — Moview">
+  <meta name="twitter:title" content="Browse Movie Requests &amp; Recommendations | Moview">
   <meta name="twitter:description" content="Help others find their next movie on Moview. Browse community requests filtered by genre, language, and mood.">
   <meta name="twitter:image" content="https://e-moview.onrender.com/og-image.png">
+  <meta name="twitter:image:alt" content="Browse Movie Requests on Moview">
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data: CollectionPage & Breadcrumb -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Browse Movie Requests",
-    "url": "https://e-moview.onrender.com/browse.html",
-    "description": "Community movie recommendation requests filtered by genre, language and mood.",
+    "name": "Browse Movie Requests & Recommendations",
+    "url": "https://e-moview.onrender.com/browse",
+    "description": "Community movie recommendation requests filtered by genre, language, and mood on Moview.",
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://e-moview.onrender.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Browse Requests", "item": "https://e-moview.onrender.com/browse.html"}
+        {"@type": "ListItem", "position": 2, "name": "Browse Requests", "item": "https://e-moview.onrender.com/browse"}
       ]
     }
   }
@@ -56,22 +76,29 @@
 
   <main class="page">
     <div class="container">
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumbs-separator" aria-hidden="true">/</span>
+        <span class="breadcrumbs-current" aria-current="page">Browse Requests</span>
+      </nav>
+
       <div class="section-header fade-in">
         <div>
-          <h1 class="section-title">Browse Requests</h1>
-          <p class="section-subtitle">See what the community is looking for and suggest movies</p>
+          <h1 class="section-title">Browse Movie Requests &amp; Recommendations</h1>
+          <p class="section-subtitle">Discover community requests, filter by genre and mood, or suggest movies to fellow film lovers.</p>
         </div>
       </div>
 
       <!-- Filter Bar -->
-      <div class="filter-bar fade-in" id="filterBar">
+      <div class="filter-bar fade-in" id="filterBar" role="search" aria-label="Filter movie requests">
         <div class="filter-group" style="flex: 1.5; min-width: 200px;">
           <label class="filter-label" for="searchRequests">Search Requests</label>
-          <input type="text" id="searchRequests" class="form-input" placeholder="Search keywords, movies, or vibes...">
+          <input type="text" id="searchRequests" class="form-input" placeholder="Search keywords, movies, or vibes..." aria-label="Search keywords or titles">
         </div>
         <div class="filter-group">
           <label class="filter-label" for="filterGenre">Genre</label>
-          <select id="filterGenre" class="form-select">
+          <select id="filterGenre" class="form-select" aria-label="Filter by genre">
             <option value="">All Genres</option>
             <option value="Action">Action</option>
             <option value="Comedy">Comedy</option>
@@ -85,7 +112,7 @@
         </div>
         <div class="filter-group">
           <label class="filter-label" for="filterLanguage">Language</label>
-          <select id="filterLanguage" class="form-select">
+          <select id="filterLanguage" class="form-select" aria-label="Filter by language">
             <option value="">All Languages</option>
             <option value="English">English</option>
             <option value="Hindi">Hindi</option>
@@ -97,7 +124,7 @@
         </div>
         <div class="filter-group">
           <label class="filter-label" for="filterMood">Mood</label>
-          <select id="filterMood" class="form-select">
+          <select id="filterMood" class="form-select" aria-label="Filter by mood">
             <option value="">All Moods</option>
             <option value="Relaxing">Relaxing</option>
             <option value="Funny">Funny</option>
@@ -110,7 +137,7 @@
       </div>
 
       <!-- Request Cards Grid -->
-      <div class="grid grid-3" id="requestsGrid">
+      <div class="grid grid-3" id="requestsGrid" aria-live="polite">
         <!-- Populated by browse.js -->
       </div>
 
@@ -122,10 +149,10 @@
 
     <footer class="footer">
       <p><strong>Moview</strong> (e-moview) — People helping people choose movies.</p>
-      <p style="margin-top:8px;font-size:0.8rem;opacity:0.5;">
-        <a href="movies.html" style="color:inherit;">🎬 Explore 200+ Top Movies</a> &nbsp;·&nbsp;
-        <a href="index.html" style="color:inherit;">Home</a> &nbsp;·&nbsp;
-        <a href="ask.html" style="color:inherit;">Ask a Question</a>
+      <p style="margin-top:8px;font-size:0.85rem;opacity:0.7;">
+        <a href="/movies" style="color:inherit;">🎬 Explore 200+ Top Movies</a> &nbsp;·&nbsp;
+        <a href="/" style="color:inherit;">Home</a> &nbsp;·&nbsp;
+        <a href="/ask" style="color:inherit;">Ask a Question</a>
       </p>
     </footer>
   </main>

@@ -122,7 +122,7 @@ async function loadRequests(reset) {
           <div class="empty-state-icon">🔍</div>
           <h3 class="empty-state-title">No requests found</h3>
           <p class="empty-state-text">Try adjusting your filters or search terms, or be the first to ask for a recommendation!</p>
-          <a href="ask.html" class="btn btn-primary mt-md">Ask for a Recommendation</a>
+          <a href="/ask" class="btn btn-primary mt-md">Ask for a Recommendation</a>
         </div>
       `;
       if (loadMoreContainer) loadMoreContainer.style.display = 'none';
@@ -210,7 +210,7 @@ function renderBrowseCard(id, data, suggestionCount, index) {
       <p class="card-description">"${escapeHTML(data.description || '')}"</p>
       <div class="card-footer">
         <span class="suggestion-count">💡 <span class="count">${suggestionCount}</span> suggestion${suggestionCount !== 1 ? 's' : ''}</span>
-        <a href="request.html?id=${id}" class="btn btn-secondary btn-sm">View Request →</a>
+        <a href="/request?id=${id}" class="btn btn-secondary btn-sm">View Request →</a>
       </div>
     </div>
   `;

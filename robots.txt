@@ -1,11 +1,32 @@
+# Robots.txt for Moview (e-moview)
+# https://e-moview.onrender.com
+
 User-agent: *
 Allow: /
+Allow: /movies
 Allow: /movies.html
+Allow: /browse
 Allow: /browse.html
+Allow: /ask
 Allow: /ask.html
+Allow: /request
 Allow: /request.html
-Disallow: /auth.html
-Disallow: /activity.html
-Disallow: /profile.html
+Allow: /css/
+Allow: /js/
+Allow: /favicon.ico
+Allow: /favicon.svg
+Allow: /og-image.png
 
+# Disallow authenticated, user-specific, or utility pages
+Disallow: /auth
+Disallow: /auth.html
+Disallow: /activity
+Disallow: /activity.html
+Disallow: /profile
+Disallow: /profile.html
+Disallow: /*?*redirect=
+Disallow: /*?*mode=
+
+# Host and Sitemap
+Host: https://e-moview.onrender.com
 Sitemap: https://e-moview.onrender.com/sitemap.xml

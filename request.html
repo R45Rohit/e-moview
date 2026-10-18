@@ -4,32 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="googleb51d43dc9d8d4e68.html">
+  <meta name="google-site-verification" content="b51d43dc9d8d4e68">
+
   <!-- Google AdSense -->
   <meta name="google-adsense-account" content="ca-pub-5380321368048106">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5380321368048106" crossorigin="anonymous"></script>
 
   <!-- Primary SEO -->
-  <title>Movie Recommendation Request Details — Moview</title>
-  <meta name="description" content="View this community movie recommendation request on Moview (e-moview) and see film suggestions recommended by real movie lovers. Add your own recommendation or browse suggestions.">
-  <meta name="keywords" content="moview, e-moview, movie request, movie suggestions, film recommendations, what to watch tonight, community movie picks, movie opinions, film discussion, recommended films">
+  <title>Movie Recommendation Request &amp; Community Suggestions | Moview</title>
+  <meta name="description" content="See community movie recommendations and discussions for this film request on Moview. Discover handpicked suggestions and contribute your own favorites.">
+  <meta name="keywords" content="moview, e-moview, movie request, movie suggestions, film recommendations, what to watch tonight, community movie picks">
   <meta name="author" content="Moview">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#07070d">
-  <link rel="canonical" href="https://e-moview.onrender.com/request.html">
+  <link rel="canonical" href="https://e-moview.onrender.com/request">
+
+  <!-- Favicons and Web App Manifest -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Preconnect and Load Google Fonts (High-Performance Core Web Vitals) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Moview">
-  <meta property="og:title" content="Movie Recommendation Request — Moview">
+  <meta property="og:title" content="Movie Recommendation Request &amp; Community Suggestions | Moview">
   <meta property="og:description" content="See movie recommendations suggested by real people for this community request on Moview.">
-  <meta property="og:url" content="https://e-moview.onrender.com/request.html">
+  <meta property="og:url" content="https://e-moview.onrender.com/request">
   <meta property="og:image" content="https://e-moview.onrender.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Movie Recommendation Request on Moview">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Movie Recommendation Request — Moview">
+  <meta name="twitter:title" content="Movie Recommendation Request &amp; Community Suggestions | Moview">
   <meta name="twitter:description" content="See movie recommendations suggested by real people for this community request on Moview.">
   <meta name="twitter:image" content="https://e-moview.onrender.com/og-image.png">
+  <meta name="twitter:image:alt" content="Movie Recommendation Request">
 
   <!-- JSON-LD Breadcrumb -->
   <script type="application/ld+json">
@@ -38,8 +58,8 @@
     "@type": "BreadcrumbList",
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://e-moview.onrender.com/"},
-      {"@type": "ListItem", "position": 2, "name": "Browse", "item": "https://e-moview.onrender.com/browse.html"},
-      {"@type": "ListItem", "position": 3, "name": "Request", "item": "https://e-moview.onrender.com/request.html"}
+      {"@type": "ListItem", "position": 2, "name": "Browse", "item": "https://e-moview.onrender.com/browse"},
+      {"@type": "ListItem", "position": 3, "name": "Request Details", "item": "https://e-moview.onrender.com/request"}
     ]
   }
   </script>
@@ -51,11 +71,21 @@
 
   <main class="page">
     <div class="container container-narrow">
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumbs-separator" aria-hidden="true">/</span>
+        <a href="/browse">Browse Requests</a>
+        <span class="breadcrumbs-separator" aria-hidden="true">/</span>
+        <span class="breadcrumbs-current" aria-current="page">Request Details</span>
+      </nav>
+
       <!-- Request Detail -->
       <div id="requestDetail">
+        <h1 class="section-title">Movie Recommendation Request</h1>
         <div class="loading-center">
           <div class="spinner spinner-lg"></div>
-          <p>Loading request...</p>
+          <p>Loading community request...</p>
         </div>
       </div>
 
@@ -98,10 +128,10 @@
 
     <footer class="footer">
       <p><strong>Moview</strong> (e-moview) — People helping people choose movies.</p>
-      <p style="margin-top:8px;font-size:0.8rem;opacity:0.5;">
-        <a href="movies.html" style="color:inherit;">🎬 Explore 200+ Top Movies</a> &nbsp;·&nbsp;
-        <a href="index.html" style="color:inherit;">Home</a> &nbsp;·&nbsp;
-        <a href="browse.html" style="color:inherit;">Browse Requests</a>
+      <p style="margin-top:8px;font-size:0.85rem;opacity:0.7;">
+        <a href="/movies" style="color:inherit;">🎬 Explore 200+ Top Movies</a> &nbsp;·&nbsp;
+        <a href="/" style="color:inherit;">Home</a> &nbsp;·&nbsp;
+        <a href="/browse" style="color:inherit;">Browse Requests</a>
       </p>
     </footer>
   </main>

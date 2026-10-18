@@ -459,7 +459,7 @@
 
   async function logout() {
     setCurrentUser(null);
-    window.location.href = 'index.html';
+    window.location.href = '/';
   }
 
   function onAuthReady(callback) {
@@ -472,7 +472,7 @@
 
   function requireAuth(redirectUrl) {
     if (!currentUser) {
-      window.location.href = redirectUrl || 'auth.html?redirect=' + encodeURIComponent(window.location.href);
+      window.location.href = redirectUrl || '/auth?redirect=' + encodeURIComponent(window.location.href);
       return false;
     }
     return true;
@@ -750,17 +750,17 @@
     return `
       <nav class="nav" role="navigation" aria-label="Main navigation">
         <div class="nav-inner">
-          <a href="index.html" class="nav-brand" aria-label="Moview Home">
+          <a href="/" class="nav-brand" aria-label="Moview Home">
             <span class="nav-brand-icon">🎬</span>
             <span>Moview</span>
           </a>
           <div class="nav-links" id="navLinks">
-            <a href="index.html" class="nav-link ${activePage === 'home' ? 'active' : ''}">Home</a>
-            <a href="movies.html" class="nav-link ${activePage === 'movies' ? 'active' : ''}">🍿 Top Movies</a>
-            <a href="browse.html" class="nav-link ${activePage === 'browse' ? 'active' : ''}">🔍 Browse</a>
-            <a href="ask.html" class="nav-link ${activePage === 'ask' ? 'active' : ''}">💬 Ask</a>
-            <a href="activity.html" class="nav-link ${activePage === 'activity' ? 'active' : ''}">📋 My Activity</a>
-            <a href="profile.html" class="nav-link ${activePage === 'profile' ? 'active' : ''}">👤 Profile</a>
+            <a href="/" class="nav-link ${activePage === 'home' ? 'active' : ''}">Home</a>
+            <a href="/movies" class="nav-link ${activePage === 'movies' ? 'active' : ''}">🍿 Top Movies</a>
+            <a href="/browse" class="nav-link ${activePage === 'browse' ? 'active' : ''}">🔍 Browse</a>
+            <a href="/ask" class="nav-link ${activePage === 'ask' ? 'active' : ''}">💬 Ask</a>
+            <a href="/activity" class="nav-link ${activePage === 'activity' ? 'active' : ''}">📋 My Activity</a>
+            <a href="/profile" class="nav-link ${activePage === 'profile' ? 'active' : ''}">👤 Profile</a>
           </div>
           <div class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" role="button" tabindex="0">
             <span></span>
@@ -770,12 +770,12 @@
         </div>
       </nav>
       <div class="nav-mobile" id="navMobile">
-        <a href="index.html" class="nav-link ${activePage === 'home' ? 'active' : ''}">🏠 Home</a>
-        <a href="movies.html" class="nav-link ${activePage === 'movies' ? 'active' : ''}">🍿 Top 200+ Movies</a>
-        <a href="browse.html" class="nav-link ${activePage === 'browse' ? 'active' : ''}">🔍 Browse Requests</a>
-        <a href="ask.html" class="nav-link ${activePage === 'ask' ? 'active' : ''}">💬 Ask Community</a>
-        <a href="activity.html" class="nav-link ${activePage === 'activity' ? 'active' : ''}">📋 My Activity</a>
-        <a href="profile.html" class="nav-link ${activePage === 'profile' ? 'active' : ''}">👤 Profile</a>
+        <a href="/" class="nav-link ${activePage === 'home' ? 'active' : ''}">🏠 Home</a>
+        <a href="/movies" class="nav-link ${activePage === 'movies' ? 'active' : ''}">🍿 Top 200+ Movies</a>
+        <a href="/browse" class="nav-link ${activePage === 'browse' ? 'active' : ''}">🔍 Browse Requests</a>
+        <a href="/ask" class="nav-link ${activePage === 'ask' ? 'active' : ''}">💬 Ask Community</a>
+        <a href="/activity" class="nav-link ${activePage === 'activity' ? 'active' : ''}">📋 My Activity</a>
+        <a href="/profile" class="nav-link ${activePage === 'profile' ? 'active' : ''}">👤 Profile</a>
       </div>
     `;
   }
@@ -825,8 +825,8 @@
         <h2 class="modal-title">Join Moview</h2>
         <p class="modal-text">Create an account or continue as a guest to post requests and share movie recommendations.</p>
         <div class="modal-actions">
-          <a href="auth.html?mode=register&redirect=${encodeURIComponent(window.location.href)}" class="btn btn-primary">Create Account</a>
-          <a href="auth.html?mode=login&redirect=${encodeURIComponent(window.location.href)}" class="btn btn-secondary">Login</a>
+          <a href="/auth?mode=register&redirect=${encodeURIComponent(window.location.href)}" class="btn btn-primary">Create Account</a>
+          <a href="/auth?mode=login&redirect=${encodeURIComponent(window.location.href)}" class="btn btn-secondary">Login</a>
         </div>
         <div style="margin-top: 14px; text-align: center;">
           <button class="btn btn-ghost btn-sm" id="modalGuestBtn">👤 Quick Continue as Guest</button>
