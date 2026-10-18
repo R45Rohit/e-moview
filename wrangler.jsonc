@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "moview",
+  "compatibility_date": "2026-10-12",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".",
+    "exclude": [
+      "node_modules/**",
+      ".git/**",
+      "package.json",
+      "package-lock.json",
+      "server.js",
+      "firestore.rules",
+      ".firebaserc",
+      "firebase.json"
+    ]
+  }
+}
